@@ -1,0 +1,255 @@
+{
+  "description": "Error analysis for HamsAI RAG system across all three search modes",
+  "total_examples_analyzed": 30,
+  "breakdown": {
+    "arabic": 10,
+    "english": 10,
+    "mixed_cross_lingual": 10
+  },
+  "error_categories": [
+    {
+      "category": "wrong_document_retrieved",
+      "count": 2,
+      "examples": [
+        {
+          "id": "err_001",
+          "query": "ما هي رسوم تمديد الضمان للمعدات التقنية؟",
+          "query_lang": "ar",
+          "expected_doc": "policy_warranty_ar",
+          "retrieved_doc": "policy_support_plans_ar",
+          "explanation": "The system confused warranty extension fees (1200 SAR) with support plan fees (4500 SAR Bronze). Both documents contain SAR amounts and the word warranty-adjacent terms. Hard negative mining for this pair was insufficient.",
+          "mode": "smart_ai_search"
+        },
+        {
+          "id": "err_002",
+          "query": "What is the cancellation fee for annual software subscriptions?",
+          "query_lang": "en",
+          "expected_doc": "policy_cancellation_ar",
+          "retrieved_doc": "policy_subscriptions_en",
+          "explanation": "The dense retrieval ranked the subscriptions document higher because it contains more subscription-related terms. The cancellation-specific chunk was ranked 4th after reranking and fell outside the top-3 context window.",
+          "mode": "smart_ai_search"
+        }
+      ]
+    },
+    {
+      "category": "correct_retrieval_hallucinated_answer",
+      "count": 2,
+      "examples": [
+        {
+          "id": "err_003",
+          "query": "كم يستغرق إصلاح المنتج تحت الضمان؟",
+          "query_lang": "ar",
+          "expected_answer": "7 days before a replacement is provided",
+          "generated_answer": "3 to 5 days for repair completion",
+          "explanation": "The correct chunk was retrieved (rank 1) but the model confused the delivery SLA (3-5 days) with the warranty repair threshold (7 days). Both numbers appear in nearby chunks and the 3B model conflated them.",
+          "mode": "smart_ai_search"
+        },
+        {
+          "id": "err_004",
+          "query": "What encryption standard does HamsAI use for data at rest?",
+          "query_lang": "en",
+          "expected_answer": "AES-256",
+          "generated_answer": "TLS 1.3 encryption for all stored data",
+          "explanation": "The model correctly retrieved the privacy policy chunk but confused AES-256 (data at rest) with TLS 1.3 (data in transit). The 3B model failed to distinguish between the two encryption contexts in the same paragraph.",
+          "mode": "smart_ai_search"
+        }
+      ]
+    },
+    {
+      "category": "missing_or_incorrect_citations",
+      "count": 3,
+      "examples": [
+        {
+          "id": "err_005",
+          "query": "What is the SLA for Severity 2 support tickets?",
+          "query_lang": "en",
+          "issue": "Answer was correct (4 hours first response) but citation [1] pointed to the Severity 1 chunk instead of the Severity 2 chunk",
+          "explanation": "Both severity chunks were in the context window. The model answered correctly from chunk 2 but cited [1] in its output. Citation extraction relies on bracket markers which the model placed incorrectly.",
+          "mode": "smart_ai_search"
+        },
+        {
+          "id": "err_006",
+          "query": "كم تبلغ رسوم الإلغاء المبكر للاشتراك السنوي؟",
+          "query_lang": "ar",
+          "issue": "No citation marker added by the model despite correct answer",
+          "explanation": "The Qwen2.5:3b model occasionally omits citation brackets when generating Arabic answers. The prompt instructs citation placement but compliance is inconsistent at 3B scale.",
+          "mode": "interactive"
+        },
+        {
+          "id": "err_007",
+          "query": "ما هي رسوم التوصيل للطلبات الصغيرة؟",
+          "query_lang": "ar",
+          "issue": "Citation [2] added but chunk 2 was not actually used in the answer",
+          "explanation": "Model added a spurious citation. The answer was drawn from chunk 1 only but the model added [2] at the end of the sentence. Citation precision is affected by small model size.",
+          "mode": "smart_ai_search"
+        }
+      ]
+    },
+    {
+      "category": "language_drift",
+      "count": 2,
+      "examples": [
+        {
+          "id": "err_008",
+          "query": "ما هي سياسة الاسترجاع للبرمجيات؟",
+          "query_lang": "ar",
+          "expected_answer_lang": "ar",
+          "actual_answer_lang": "mixed",
+          "explanation": "The answer started in Arabic but switched to English mid-sentence when describing technical terms like Activation Date and Customized Software. The prompt instructs Arabic-only output but the 3B model occasionally drifts when the retrieved context contains dense English technical terms.",
+          "mode": "smart_ai_search"
+        },
+        {
+          "id": "err_009",
+          "query": "What are the minimum CPU and RAM requirements?",
+          "query_lang": "en",
+          "expected_answer_lang": "en",
+          "actual_answer_lang": "mixed",
+          "explanation": "The retrieved chunk was in Arabic (mixed document). The model partially translated but left some Arabic phrases in the English answer. Cross-lingual generation is not perfectly handled at 3B scale.",
+          "mode": "smart_ai_search"
+        }
+      ]
+    },
+    {
+      "category": "incorrect_numbers_dates_prices",
+      "count": 2,
+      "examples": [
+        {
+          "id": "err_010",
+          "query": "كم تبلغ رسوم إعادة الجدولة إذا لم يكن الموقع جاهزاً؟",
+          "query_lang": "ar",
+          "expected_answer": "300 SAR",
+          "generated_answer": "250 SAR",
+          "explanation": "The model confused the rescheduling fee (300 SAR) with the standard delivery fee (250 SAR). Both appear in the delivery policy document and the 3B model conflated them when multiple SAR amounts were present in the context.",
+          "mode": "smart_ai_search"
+        },
+        {
+          "id": "err_011",
+          "query": "What is the data retention period after subscription termination?",
+          "query_lang": "en",
+          "expected_answer": "30 days active then 90 days backup",
+          "generated_answer": "90 days total retention",
+          "explanation": "The model collapsed the two-stage retention policy (30 days active + 90 days backup) into a single 90-day figure. The distinction between active database and offline backup was not preserved in the generated answer.",
+          "mode": "smart_ai_search"
+        }
+      ]
+    },
+    {
+      "category": "not_found_handled_incorrectly",
+      "count": 2,
+      "examples": [
+        {
+          "id": "err_012",
+          "query": "What is the price of HamsAI mobile app subscription?",
+          "query_lang": "en",
+          "expected_answer": "not found in knowledge bank",
+          "generated_answer": "The HamsAI mobile app is available for $150 per user per month",
+          "explanation": "The model hallucinated a price by generalizing from the SaaS Pro pricing. The retrieved context did not contain mobile app information but the model fabricated an answer instead of returning a not-found response. This is the most critical error type.",
+          "mode": "smart_ai_search"
+        },
+        {
+          "id": "err_013",
+          "query": "هل تدعم HamsAI اللغة الفرنسية؟",
+          "query_lang": "ar",
+          "expected_answer": "not found in knowledge bank",
+          "generated_answer": "نعم، تدعم HamsAI عدة لغات",
+          "explanation": "No document in the knowledge bank mentions French language support. The model fabricated a positive answer. The not-found instruction in the Arabic prompt was not followed consistently by the 3B model.",
+          "mode": "smart_ai_search"
+        }
+      ]
+    },
+    {
+      "category": "conversation_memory_failure",
+      "count": 2,
+      "examples": [
+        {
+          "id": "err_014",
+          "conversation_id": "conv_test_001",
+          "turn": 4,
+          "user_message": "وكم رسومها؟",
+          "standalone_query_expected": "كم رسوم تمديد الضمان للمعدات التقنية في HamsAI؟",
+          "standalone_query_generated": "كم رسوم الخدمة؟",
+          "explanation": "The query rewriter failed to incorporate enough context from previous turns. The reference to warranty extension from turn 2 was lost because the history window only captured the last 3 turns and the relevant context was in turn 1.",
+          "mode": "interactive"
+        },
+        {
+          "id": "err_015",
+          "conversation_id": "conv_test_002",
+          "turn": 3,
+          "user_message": "We would like to switch to English now. Tell me about cancellation.",
+          "issue": "System continued responding in Arabic despite language switch",
+          "explanation": "Language detection on the rewritten standalone query returned Arabic because the rewriter incorporated Arabic context from previous turns into the rewritten query. The response language followed the rewritten query language rather than the original user message language.",
+          "mode": "interactive"
+        }
+      ]
+    },
+    {
+      "category": "mixed_arabic_english_query_handling",
+      "count": 2,
+      "examples": [
+        {
+          "id": "err_016",
+          "query": "أبغى أعرف الـ pricing للباقة المؤسسية",
+          "query_lang": "mixed",
+          "issue": "Retrieved support plans document instead of enterprise pricing document",
+          "explanation": "The mixed query contains informal phrasing. The embedding model was not trained on Saudi dialect mixed queries. The word pricing was correctly detected but the informal Arabic structure reduced retrieval precision.",
+          "mode": "smart_ai_search"
+        },
+        {
+          "id": "err_017",
+          "query": "Gold Support الـ SLA وقت الاستجابة كم؟",
+          "query_lang": "mixed",
+          "issue": "Correct document retrieved but answer mixed English and Arabic terms inconsistently",
+          "explanation": "The model correctly retrieved the support plans chunk but the generated answer mixed English SLA terminology with Arabic explanation in an inconsistent way, reducing readability.",
+          "mode": "smart_ai_search"
+        }
+      ]
+    },
+    {
+      "category": "untranslated_text_in_wrong_language_output",
+      "count": 2,
+      "distinction_from_language_drift": "Language drift = model answers in the wrong language entirely. Untranslated text = model answers in the correct language but leaves source-document words in the other language embedded inside the answer without translating them.",
+      "examples": [
+        {
+          "id": "err_018",
+          "query": "ما هي متطلبات النظام لتشغيل منصة HamsAI؟",
+          "query_lang": "ar",
+          "expected_answer_lang": "ar",
+          "actual_answer_snippet": "يجب أن يكون الجهاز مزوداً بـ 16GB RAM وبطاقة رسومات تدعم CUDA compute capability 7.5 أو أعلى، مع نظام تشغيل Ubuntu 20.04 LTS or later.",
+          "issue": "Arabic answer contains untranslated English OS name and technical spec phrases verbatim from the English source chunk",
+          "explanation": "The retrieved chunk was from an English infrastructure document. The model answered in Arabic (correct language) but embedded the English phrases 'Ubuntu 20.04 LTS or later' and 'CUDA compute capability 7.5' without translating or paraphrasing them. At 3B scale the model does not reliably transliterate or translate technical terms when the source document is English and the output language is Arabic.",
+          "mode": "smart_ai_search"
+        },
+        {
+          "id": "err_019",
+          "query": "What is the warranty period for office furniture products?",
+          "query_lang": "en",
+          "expected_answer_lang": "en",
+          "actual_answer_snippet": "The warranty period is 2 years from the date of delivery. يشمل الضمان العيوب الهيكلية فقط. Contact support to file a claim.",
+          "issue": "English answer contains an untranslated Arabic sentence from the Arabic source chunk",
+          "explanation": "The retrieved chunk was from a mixed Arabic/English warranty document. The model answered primarily in English (correct language) but left one Arabic sentence 'يشمل الضمان العيوب الهيكلية فقط' (warranty covers structural defects only) untranslated in the middle of the English response. The 3B model does not consistently translate sentences when the retrieved context is a mixed-language document.",
+          "mode": "smart_ai_search"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "most_common_error": "missing_or_incorrect_citations",
+    "most_critical_error": "not_found_handled_incorrectly",
+    "root_causes": [
+      "Small 3B generator model conflates similar numbers and facts in dense context",
+      "Citation bracket compliance is inconsistent at 3B scale",
+      "Arabic prompt instruction following weaker than English at 3B scale",
+      "Small training dataset limits hard negative diversity",
+      "Query rewriter loses context beyond 3-turn history window",
+      "3B model does not reliably translate technical terms when source and output languages differ"
+    ],
+    "recommended_fixes": [
+      "Use 7B+ generator model on L4 GPU for better instruction following",
+      "Post-process citations programmatically rather than relying on model output",
+      "Expand training dataset to 500+ pairs with more diverse hard negatives",
+      "Increase history window to 5 turns for query rewriting",
+      "Add explicit not-found detection layer before generation",
+      "Add post-processing step to detect and flag untranslated spans in the output language"
+    ]
+  }
+}

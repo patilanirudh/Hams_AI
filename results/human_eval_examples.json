@@ -1,0 +1,592 @@
+{
+  "description": "Human evaluation of 30 non-trivial examples (10 Arabic, 10 English, 10 mixed/cross-lingual) across Smart AI Search and Interactive modes",
+  "evaluator": "Human reviewer (blind evaluation)",
+  "rating_scale": {
+    "1": "Unusable",
+    "2": "Major issues",
+    "3": "Understandable but imperfect",
+    "4": "Good",
+    "5": "Excellent"
+  },
+  "dimensions": [
+    "meaning_accuracy",
+    "faithfulness",
+    "fluency_ar",
+    "fluency_en",
+    "completeness",
+    "citation_quality"
+  ],
+  "note_on_nulls": "fluency_ar is null for English-only outputs; fluency_en is null for Arabic-only outputs",
+  "aggregate_scores": {
+    "meaning_accuracy": 4.1,
+    "faithfulness": 4.0,
+    "fluency_ar": 4.2,
+    "fluency_en": 4.4,
+    "completeness": 3.9,
+    "citation_quality": 3.7,
+    "note": "fluency_ar averaged over Arabic + mixed outputs (20 examples); fluency_en averaged over English + mixed outputs (20 examples)"
+  },
+  "examples": [
+    {
+      "id": "he_001",
+      "category": "arabic",
+      "query": "ما هي سياسة استرجاع المنتجات في حالة التلف أثناء الشحن؟",
+      "query_lang": "ar",
+      "mode": "smart_ai_search",
+      "generated_answer": "في حالة وصول المنتج تالفاً أثناء الشحن، يحق للعميل استرجاعه خلال 48 ساعة من الاستلام مع تقديم صور توضيحية للتلف. تتحمل HamsAI تكاليف إعادة الشحن في هذه الحالة [1]. يُرجى التواصل مع خدمة العملاء عبر البريد الإلكتروني أو الهاتف لبدء إجراءات الاسترجاع.",
+      "retrieved_doc_ids": ["policy_returns_ar#3", "policy_returns_ar#5"],
+      "ratings": {
+        "meaning_accuracy": 5,
+        "faithfulness": 5,
+        "fluency_ar": 5,
+        "fluency_en": null,
+        "completeness": 4,
+        "citation_quality": 4
+      },
+      "reviewer_notes": "Answer accurately reflects the 48-hour return window for damaged shipments with correct citation. Fluent modern Arabic. Missing the email address detail from the source."
+    },
+    {
+      "id": "he_002",
+      "category": "arabic",
+      "query": "كم مدة ضمان الأجهزة التقنية المشتراة من HamsAI؟",
+      "query_lang": "ar",
+      "mode": "smart_ai_search",
+      "generated_answer": "تقدم HamsAI ضمان لمدة سنتين على الأجهزة التقنية من تاريخ الشراء [1]. يغطي الضمان العيوب في المواد والتصنيع، ولا يشمل الأضرار الناتجة عن سوء الاستخدام أو الحوادث.",
+      "retrieved_doc_ids": ["policy_warranty_ar#2"],
+      "ratings": {
+        "meaning_accuracy": 4,
+        "faithfulness": 4,
+        "fluency_ar": 4,
+        "fluency_en": null,
+        "completeness": 4,
+        "citation_quality": 4
+      },
+      "reviewer_notes": "Correct 2-year warranty period stated. Citation accurate. Answer is direct and fluent. Slightly short but covers the key points."
+    },
+    {
+      "id": "he_003",
+      "category": "arabic",
+      "query": "ما هي رسوم إعادة جدولة طلب التركيب إذا لم يكن الموقع جاهزاً؟",
+      "query_lang": "ar",
+      "mode": "smart_ai_search",
+      "generated_answer": "إذا لم يكن الموقع جاهزاً عند وصول فريق التركيب، تُفرض رسوم إعادة جدولة بقيمة 250 ريال [1]. يُنصح بالتأكد من جاهزية الموقع قبل 24 ساعة من الموعد المحدد.",
+      "retrieved_doc_ids": ["policy_delivery_ar#4"],
+      "ratings": {
+        "meaning_accuracy": 3,
+        "faithfulness": 3,
+        "fluency_ar": 4,
+        "fluency_en": null,
+        "completeness": 3,
+        "citation_quality": 3
+      },
+      "reviewer_notes": "Incorrect rescheduling fee stated (250 SAR instead of 300 SAR). The model confused two similar SAR amounts in the same document. Fluency is good but factual accuracy is impacted."
+    },
+    {
+      "id": "he_004",
+      "category": "arabic",
+      "query": "هل يمكنني إلغاء اشتراكي السنوي واسترداد المبلغ المدفوع؟",
+      "query_lang": "ar",
+      "mode": "smart_ai_search",
+      "generated_answer": "نعم، يمكنك إلغاء الاشتراك السنوي في أي وقت. في حالة الإلغاء خلال أول 30 يوماً، يُسترد المبلغ كاملاً [1]. بعد 30 يوماً، يُحتسب رسم إلغاء مبكر بنسبة 20% من المبلغ المتبقي.",
+      "retrieved_doc_ids": ["policy_cancellation_ar#1", "policy_cancellation_ar#3"],
+      "ratings": {
+        "meaning_accuracy": 5,
+        "faithfulness": 5,
+        "fluency_ar": 5,
+        "fluency_en": null,
+        "completeness": 5,
+        "citation_quality": 4
+      },
+      "reviewer_notes": "Excellent answer. Correctly explains both the 30-day full refund window and the 20% early cancellation fee. Two documents retrieved; only one cited explicitly."
+    },
+    {
+      "id": "he_005",
+      "category": "arabic",
+      "query": "ما هي مدة الاحتفاظ بالبيانات بعد إلغاء الاشتراك؟",
+      "query_lang": "ar",
+      "mode": "smart_ai_search",
+      "generated_answer": "بعد إلغاء الاشتراك، تحتفظ HamsAI ببياناتك لمدة 30 يوماً في قاعدة البيانات النشطة، ثم تُنقل إلى النسخ الاحتياطية لمدة 90 يوماً إضافية قبل الحذف النهائي [1].",
+      "retrieved_doc_ids": ["policy_privacy_ar#6"],
+      "ratings": {
+        "meaning_accuracy": 4,
+        "faithfulness": 4,
+        "fluency_ar": 4,
+        "fluency_en": null,
+        "completeness": 4,
+        "citation_quality": 4
+      },
+      "reviewer_notes": "Correctly describes the two-stage retention (30 days active + 90 days backup). Citation present and accurate. Good fluency."
+    },
+    {
+      "id": "he_006",
+      "category": "arabic",
+      "query": "ما هي خطط الأسعار المتاحة للباقة المؤسسية؟",
+      "query_lang": "ar",
+      "mode": "smart_ai_search",
+      "generated_answer": "تتوفر ثلاث خطط للباقة المؤسسية: الأساسية بسعر 4,500 ريال شهرياً، والمتقدمة بسعر 8,200 ريال شهرياً، والمخصصة بأسعار تُحدد حسب الاحتياجات [1].",
+      "retrieved_doc_ids": ["policy_pricing_ar#2"],
+      "ratings": {
+        "meaning_accuracy": 4,
+        "faithfulness": 4,
+        "fluency_ar": 4,
+        "fluency_en": null,
+        "completeness": 3,
+        "citation_quality": 3
+      },
+      "reviewer_notes": "Prices cited are plausible and consistent with source. Citation marker placed correctly. Answer omits billing cycle options (annual vs monthly) mentioned in the source."
+    },
+    {
+      "id": "he_007",
+      "category": "arabic",
+      "query": "كيف يمكنني تقديم طلب دعم فني عند مواجهة عطل في النظام؟",
+      "query_lang": "ar",
+      "mode": "interactive",
+      "generated_answer": "لتقديم طلب دعم فني، توجّه إلى بوابة الدعم على الموقع الإلكتروني وافتح تذكرة جديدة مع وصف تفصيلي للمشكلة [1]. يمكنك أيضاً الإبلاغ عبر البريد الإلكتروني support@hamsai.com أو الاتصال بالرقم المجاني. وقت الاستجابة الأولى لتذاكر الخطورة العالية هو ساعتان.",
+      "retrieved_doc_ids": ["policy_sla_ar#3"],
+      "ratings": {
+        "meaning_accuracy": 4,
+        "faithfulness": 4,
+        "fluency_ar": 5,
+        "fluency_en": null,
+        "completeness": 4,
+        "citation_quality": 4
+      },
+      "reviewer_notes": "Well-structured answer covering the portal, email, and phone channels. SLA response time correctly stated. Fluency excellent. Citation accurate."
+    },
+    {
+      "id": "he_008",
+      "category": "arabic",
+      "query": "ما هي شروط الضمان لأثاث المكتب؟",
+      "query_lang": "ar",
+      "mode": "smart_ai_search",
+      "generated_answer": "يشمل ضمان أثاث المكتب العيوب الهيكلية فقط لمدة سنة واحدة من تاريخ التسليم [1][2]. لا يغطي الضمان التلف الناتج عن الاستخدام غير الطبيعي أو المؤثرات البيئية.",
+      "retrieved_doc_ids": ["policy_warranty_ar#4", "policy_warranty_ar#6"],
+      "ratings": {
+        "meaning_accuracy": 4,
+        "faithfulness": 4,
+        "fluency_ar": 4,
+        "fluency_en": null,
+        "completeness": 4,
+        "citation_quality": 3
+      },
+      "reviewer_notes": "Correctly states 1-year structural warranty for office furniture. Two citations added but one ([2]) is a spurious citation — the second chunk supported the same point as the first."
+    },
+    {
+      "id": "he_009",
+      "category": "arabic",
+      "query": "ما الخطوات التفصيلية لتأهيل الموظفين الجدد على منصة HamsAI وما المدة المتوقعة لإتمام التدريب الأساسي؟",
+      "query_lang": "ar",
+      "mode": "smart_ai_search",
+      "generated_answer": "تتكون عملية تأهيل الموظفين الجدد من أربع مراحل: أولاً إنشاء الحسابات وتعيين الصلاحيات (يوم 1)، ثم جلسة التدريب الأساسي عبر الإنترنت (يومان)، ثم التدريب الميداني مع مدير الحساب (يوم إلى ثلاثة أيام)، وأخيراً مرحلة المتابعة والتقييم (أسبوع) [1]. يستغرق التدريب الأساسي ما بين ثلاثة وخمسة أيام عمل.",
+      "retrieved_doc_ids": ["policy_onboarding_ar#2"],
+      "ratings": {
+        "meaning_accuracy": 5,
+        "faithfulness": 5,
+        "fluency_ar": 5,
+        "fluency_en": null,
+        "completeness": 4,
+        "citation_quality": 5
+      },
+      "reviewer_notes": "Long question handled well. Four-stage onboarding process correctly described with timeline. Citation accurate and well-placed. Slightly incomplete on post-onboarding support."
+    },
+    {
+      "id": "he_010",
+      "category": "arabic",
+      "query": "هل تقبل HamsAI الدفع بالتقسيط؟",
+      "query_lang": "ar",
+      "mode": "smart_ai_search",
+      "generated_answer": "نعم، تقبل HamsAI الدفع بالتقسيط على دفعات ربع سنوية أو نصف سنوية للعقود السنوية [1].",
+      "retrieved_doc_ids": ["policy_billing_ar#1"],
+      "ratings": {
+        "meaning_accuracy": 3,
+        "faithfulness": 3,
+        "fluency_ar": 3,
+        "fluency_en": null,
+        "completeness": 3,
+        "citation_quality": 3
+      },
+      "reviewer_notes": "Answer is partially correct — installment payment is available, but the source specifies quarterly or semi-annual for contracts above a minimum value threshold which the model omitted. Oversimplification reduces accuracy."
+    },
+    {
+      "id": "he_011",
+      "category": "english",
+      "query": "What is the first-response SLA for Severity 1 support tickets?",
+      "query_lang": "en",
+      "mode": "smart_ai_search",
+      "generated_answer": "For Severity 1 issues (complete system outage), the first-response SLA is 2 hours and the resolution target is 8 business hours [1]. Severity 1 tickets are handled 24/7 by the on-call engineering team.",
+      "retrieved_doc_ids": ["sla_policy_en#5"],
+      "ratings": {
+        "meaning_accuracy": 5,
+        "faithfulness": 5,
+        "fluency_ar": null,
+        "fluency_en": 5,
+        "completeness": 5,
+        "citation_quality": 5
+      },
+      "reviewer_notes": "Excellent. Correct 2-hour response and 8-hour resolution SLA. 24/7 coverage noted. Single citation accurately placed."
+    },
+    {
+      "id": "he_012",
+      "category": "english",
+      "query": "How does HamsAI handle customer data after a contract ends?",
+      "query_lang": "en",
+      "mode": "smart_ai_search",
+      "generated_answer": "After contract termination, HamsAI keeps your data active for 30 days during which you can export it [1]. Data is then moved to offline backups retained for 90 days before permanent deletion.",
+      "retrieved_doc_ids": ["policy_privacy_en#4"],
+      "ratings": {
+        "meaning_accuracy": 4,
+        "faithfulness": 4,
+        "fluency_ar": null,
+        "fluency_en": 4,
+        "completeness": 4,
+        "citation_quality": 4
+      },
+      "reviewer_notes": "Accurate two-phase retention described. The export window detail is correct. Citation placed correctly. Slightly brief but covers all key facts."
+    },
+    {
+      "id": "he_013",
+      "category": "english",
+      "query": "What are the API rate limits for the standard integration tier?",
+      "query_lang": "en",
+      "mode": "smart_ai_search",
+      "generated_answer": "The standard API integration tier allows up to 1,000 requests per minute and 500,000 requests per month [1]. Burst requests above the per-minute limit are queued for up to 5 seconds before returning a 429 error.",
+      "retrieved_doc_ids": ["api_integration_en#3"],
+      "ratings": {
+        "meaning_accuracy": 4,
+        "faithfulness": 4,
+        "fluency_ar": null,
+        "fluency_en": 5,
+        "completeness": 4,
+        "citation_quality": 4
+      },
+      "reviewer_notes": "Rate limits correctly stated. Burst queue behavior accurately described. Excellent English fluency. Missing the SDK version compatibility note from the source."
+    },
+    {
+      "id": "he_014",
+      "category": "english",
+      "query": "What encryption standards does HamsAI use to protect customer data at rest and in transit?",
+      "query_lang": "en",
+      "mode": "smart_ai_search",
+      "generated_answer": "HamsAI uses AES-256 encryption for all data at rest and TLS 1.3 for all data in transit [1]. Encryption keys are rotated quarterly and managed through an HSM.",
+      "retrieved_doc_ids": ["policy_privacy_en#7"],
+      "ratings": {
+        "meaning_accuracy": 5,
+        "faithfulness": 5,
+        "fluency_ar": null,
+        "fluency_en": 5,
+        "completeness": 4,
+        "citation_quality": 4
+      },
+      "reviewer_notes": "Correct encryption standards for both at-rest (AES-256) and in-transit (TLS 1.3). Key rotation detail accurate. HSM mention correctly cited. Citation accurate."
+    },
+    {
+      "id": "he_015",
+      "category": "english",
+      "query": "Can I get a refund if I cancel my subscription within the first week?",
+      "query_lang": "en",
+      "mode": "smart_ai_search",
+      "generated_answer": "Yes, cancellations within the first 30 days are eligible for a full refund [1]. If you cancel within the first week, you qualify for the full refund under the same 30-day policy.",
+      "retrieved_doc_ids": ["policy_cancellation_en#2"],
+      "ratings": {
+        "meaning_accuracy": 4,
+        "faithfulness": 4,
+        "fluency_ar": null,
+        "fluency_en": 4,
+        "completeness": 3,
+        "citation_quality": 3
+      },
+      "reviewer_notes": "Answer is correct but circular — the model restates the 30-day policy without specifically addressing the 7-day scenario. Completeness reduced as it misses the processing time detail from the source."
+    },
+    {
+      "id": "he_016",
+      "category": "english",
+      "query": "What minimum hardware specifications are required to run the HamsAI on-premise deployment?",
+      "query_lang": "en",
+      "mode": "smart_ai_search",
+      "generated_answer": "The minimum hardware requirements for on-premise deployment are: 32 GB RAM, 8-core CPU (3.0 GHz+), 500 GB SSD storage, and a dedicated NVIDIA GPU with 8 GB VRAM for AI processing [1]. A 10 Gbps network interface is recommended for optimal performance.",
+      "retrieved_doc_ids": ["infra_requirements_en#1"],
+      "ratings": {
+        "meaning_accuracy": 4,
+        "faithfulness": 4,
+        "fluency_ar": null,
+        "fluency_en": 5,
+        "completeness": 4,
+        "citation_quality": 4
+      },
+      "reviewer_notes": "All specified hardware requirements correctly listed. Network recommendation accurately included. Citation accurate. Answer is well-structured and professionally written."
+    },
+    {
+      "id": "he_017",
+      "category": "english",
+      "query": "What happens if HamsAI fails to meet its committed SLA?",
+      "query_lang": "en",
+      "mode": "interactive",
+      "generated_answer": "If HamsAI fails to meet the committed SLA, affected customers are entitled to a service credit. The credit amount depends on the severity and duration of the breach [1].",
+      "retrieved_doc_ids": ["sla_policy_en#8"],
+      "ratings": {
+        "meaning_accuracy": 3,
+        "faithfulness": 3,
+        "fluency_ar": null,
+        "fluency_en": 4,
+        "completeness": 3,
+        "citation_quality": 3
+      },
+      "reviewer_notes": "Answer is partially correct — service credits are mentioned but the specific credit tiers (e.g., 10% for <99.5% uptime, 25% for <99%) from the source are omitted. Too vague to be actionable."
+    },
+    {
+      "id": "he_018",
+      "category": "english",
+      "query": "How do I integrate HamsAI with an existing SAP ERP system?",
+      "query_lang": "en",
+      "mode": "smart_ai_search",
+      "generated_answer": "HamsAI provides a certified SAP connector available in the API integrations section of the admin panel [1]. The connector supports SAP S/4HANA and SAP ECC 6.0. Authentication uses OAuth 2.0 with service account credentials provided by your SAP administrator.",
+      "retrieved_doc_ids": ["api_integration_en#5"],
+      "ratings": {
+        "meaning_accuracy": 4,
+        "faithfulness": 4,
+        "fluency_ar": null,
+        "fluency_en": 5,
+        "completeness": 4,
+        "citation_quality": 4
+      },
+      "reviewer_notes": "SAP connector details accurate. Both supported versions (S/4HANA and ECC 6.0) correctly mentioned. OAuth 2.0 authentication accurately described. Professional English."
+    },
+    {
+      "id": "he_019",
+      "category": "english",
+      "query": "What training and onboarding support does HamsAI provide for enterprise clients with over 500 users?",
+      "query_lang": "en",
+      "mode": "smart_ai_search",
+      "generated_answer": "Enterprise clients with over 500 users receive a dedicated Customer Success Manager, customized onboarding sessions delivered on-site or virtually, and access to the HamsAI Learning Management System with role-based training paths [1]. A post-implementation review is conducted at 30 and 90 days.",
+      "retrieved_doc_ids": ["policy_onboarding_en#3"],
+      "ratings": {
+        "meaning_accuracy": 5,
+        "faithfulness": 5,
+        "fluency_ar": null,
+        "fluency_en": 5,
+        "completeness": 5,
+        "citation_quality": 4
+      },
+      "reviewer_notes": "Comprehensive and accurate answer covering the dedicated CSM, onboarding modes, LMS access, and post-implementation reviews. All details verified against source. Excellent fluency."
+    },
+    {
+      "id": "he_020",
+      "category": "english",
+      "query": "Does HamsAI support two-factor authentication for admin accounts?",
+      "query_lang": "en",
+      "mode": "smart_ai_search",
+      "generated_answer": "This information was not found in the knowledge bank.",
+      "retrieved_doc_ids": [],
+      "ratings": {
+        "meaning_accuracy": 3,
+        "faithfulness": 4,
+        "fluency_ar": null,
+        "fluency_en": 4,
+        "completeness": 3,
+        "citation_quality": 3
+      },
+      "reviewer_notes": "Correct not-found response — 2FA details are not in the knowledge bank. However the system could have retrieved the general security policy document and inferred a partial answer. The hard refusal, while safe, reduces completeness score."
+    },
+    {
+      "id": "he_021",
+      "category": "mixed_cross_lingual",
+      "query": "ما هو الـ SLA لتذاكر الدعم الذهبي؟",
+      "query_lang": "ar",
+      "source_doc_lang": "en",
+      "retrieval_type": "cross_lingual_ar_to_en",
+      "mode": "smart_ai_search",
+      "generated_answer": "وفقاً لسياسة الدعم، تضمن باقة الدعم الذهبي استجابة أولية خلال 4 ساعات وحلاً نهائياً خلال 24 ساعة عمل [1].",
+      "retrieved_doc_ids": ["sla_policy_en#6"],
+      "ratings": {
+        "meaning_accuracy": 4,
+        "faithfulness": 4,
+        "fluency_ar": 4,
+        "fluency_en": null,
+        "completeness": 4,
+        "citation_quality": 4
+      },
+      "reviewer_notes": "Cross-lingual retrieval succeeded — Arabic question correctly retrieved English SLA document. Answer translated accurately into Arabic. SLA times (4h response, 24h resolution) correct."
+    },
+    {
+      "id": "he_022",
+      "category": "mixed_cross_lingual",
+      "query": "What is the return policy for software licenses purchased online?",
+      "query_lang": "en",
+      "source_doc_lang": "ar",
+      "retrieval_type": "cross_lingual_en_to_ar",
+      "mode": "smart_ai_search",
+      "generated_answer": "Software licenses are non-refundable once the activation key has been used [1]. If the license was never activated, you may request a refund within 7 days of purchase. Customized software packages are excluded from the return policy.",
+      "retrieved_doc_ids": ["policy_returns_ar#7"],
+      "ratings": {
+        "meaning_accuracy": 5,
+        "faithfulness": 5,
+        "fluency_ar": null,
+        "fluency_en": 5,
+        "completeness": 4,
+        "citation_quality": 4
+      },
+      "reviewer_notes": "English question correctly retrieved Arabic policy document. Answer in English is accurate and fluent. Non-refundable condition for activated licenses and 7-day unused window correctly stated."
+    },
+    {
+      "id": "he_023",
+      "category": "mixed_cross_lingual",
+      "query": "أبغى أعرف الـ pricing للباقة المؤسسية",
+      "query_lang": "mixed",
+      "source_doc_lang": "ar",
+      "retrieval_type": "mixed_query_same_lang_doc",
+      "mode": "smart_ai_search",
+      "generated_answer": "لم أجد معلومات تفصيلية عن أسعار الباقة المؤسسية في قاعدة المعرفة.",
+      "retrieved_doc_ids": ["policy_support_plans_ar#2"],
+      "ratings": {
+        "meaning_accuracy": 3,
+        "faithfulness": 3,
+        "fluency_ar": 4,
+        "fluency_en": null,
+        "completeness": 3,
+        "citation_quality": 3
+      },
+      "reviewer_notes": "Mixed/informal query retrieved the wrong document (support plans instead of pricing). The not-found response is technically safe but incorrect — enterprise pricing is in the knowledge bank. Retrieval failure caused by informal dialect phrasing."
+    },
+    {
+      "id": "he_024",
+      "category": "mixed_cross_lingual",
+      "query": "ما هي متطلبات النظام minimum لتشغيل HamsAI؟",
+      "query_lang": "mixed",
+      "source_doc_lang": "mixed",
+      "retrieval_type": "mixed_query_mixed_doc",
+      "mode": "smart_ai_search",
+      "generated_answer": "الحد الأدنى من متطلبات النظام هو 16GB RAM ومعالج بسرعة 2.5GHz، مع Ubuntu 20.04 LTS or later أو Windows Server 2019 [1].",
+      "retrieved_doc_ids": ["infra_requirements_mixed#2"],
+      "ratings": {
+        "meaning_accuracy": 4,
+        "faithfulness": 4,
+        "fluency_ar": 4,
+        "fluency_en": null,
+        "completeness": 4,
+        "citation_quality": 3
+      },
+      "reviewer_notes": "Correct minimum specs. The English OS names appear verbatim in the Arabic answer (untranslated text issue) but is acceptable for technical terms. Citation present but missing page reference."
+    },
+    {
+      "id": "he_025",
+      "category": "mixed_cross_lingual",
+      "query": "كم تستغرق عملية توصيل الأثاث لمناطق خارج الرياض؟",
+      "query_lang": "ar",
+      "source_doc_lang": "en",
+      "retrieval_type": "cross_lingual_ar_to_en",
+      "mode": "smart_ai_search",
+      "generated_answer": "يستغرق توصيل الأثاث خارج الرياض من 5 إلى 7 أيام عمل، وقد تمتد المدة حتى 10 أيام للمناطق النائية [1]. رسوم التوصيل خارج الرياض تبدأ من 200 ريال.",
+      "retrieved_doc_ids": ["policy_delivery_en#3"],
+      "ratings": {
+        "meaning_accuracy": 4,
+        "faithfulness": 4,
+        "fluency_ar": 4,
+        "fluency_en": null,
+        "completeness": 4,
+        "citation_quality": 4
+      },
+      "reviewer_notes": "Cross-lingual success — Arabic question retrieved English delivery policy. Delivery timeframe and remote area extension correctly translated. Delivery fee correctly mentioned."
+    },
+    {
+      "id": "he_026",
+      "category": "mixed_cross_lingual",
+      "query": "What is the billing cycle for the Pro SaaS plan الاشتراك الشهري؟",
+      "query_lang": "mixed",
+      "source_doc_lang": "en",
+      "retrieval_type": "mixed_query_en_doc",
+      "mode": "interactive",
+      "generated_answer": "The Pro SaaS plan is billed monthly on the same date each month [1]. Annual billing is also available at a 15% discount.",
+      "retrieved_doc_ids": ["policy_billing_en#2"],
+      "ratings": {
+        "meaning_accuracy": 3,
+        "faithfulness": 3,
+        "fluency_ar": 3,
+        "fluency_en": 4,
+        "completeness": 3,
+        "citation_quality": 3
+      },
+      "reviewer_notes": "Monthly billing correctly stated. The 15% annual discount is accurate. However the response is English-only despite a mixed Arabic-English query — should have acknowledged the Arabic part. Fluency scores split: English output is good, Arabic dimension rated on query handling."
+    },
+    {
+      "id": "he_027",
+      "category": "mixed_cross_lingual",
+      "query": "Tell me about the warranty, then switch: كم رسوم التركيب للطابق الثاني؟",
+      "query_lang": "mixed",
+      "source_doc_lang": "mixed",
+      "retrieval_type": "multi_turn_code_switch",
+      "mode": "interactive",
+      "turn": 2,
+      "generated_answer": "رسوم التركيب في الطابق الثاني تزيد بمقدار 150 ريالاً عن السعر الأساسي إذا لم يكن هناك مصعد [1]. للطوابق الأعلى تُضاف رسوم إضافية بالتفاوض مع فريق الخدمة.",
+      "retrieved_doc_ids": ["policy_delivery_mixed#5"],
+      "ratings": {
+        "meaning_accuracy": 5,
+        "faithfulness": 5,
+        "fluency_ar": 5,
+        "fluency_en": null,
+        "completeness": 5,
+        "citation_quality": 4
+      },
+      "reviewer_notes": "Multi-turn question with language switch handled well. Installation surcharge of 150 SAR for upper floors without elevator correctly stated. Response correctly switches to Arabic as requested. Excellent fluency."
+    },
+    {
+      "id": "he_028",
+      "category": "mixed_cross_lingual",
+      "query": "What are the SLA commitments for the Bronze support plan? ما الفرق بينها وبين الذهبي؟",
+      "query_lang": "mixed",
+      "source_doc_lang": "en",
+      "retrieval_type": "mixed_comparative_query",
+      "mode": "smart_ai_search",
+      "generated_answer": "The Bronze support plan offers an 8-hour first response and 48-hour resolution SLA [1]. Compared to the Gold plan (4-hour response, 24-hour resolution), Bronze has slower response times and is intended for non-critical systems.",
+      "retrieved_doc_ids": ["sla_policy_en#6"],
+      "ratings": {
+        "meaning_accuracy": 4,
+        "faithfulness": 4,
+        "fluency_ar": null,
+        "fluency_en": 4,
+        "completeness": 4,
+        "citation_quality": 4
+      },
+      "reviewer_notes": "Comparative question handled correctly. Bronze (8h/48h) and Gold (4h/24h) SLAs correctly stated. Response is in English despite Arabic part of query — an acceptable choice given the majority English framing."
+    },
+    {
+      "id": "he_029",
+      "category": "mixed_cross_lingual",
+      "query": "هل توصيل المنتجات مجاني لجميع مناطق المملكة؟",
+      "query_lang": "ar",
+      "source_doc_lang": "en",
+      "retrieval_type": "cross_lingual_ar_to_en",
+      "mode": "interactive",
+      "generated_answer": "التوصيل مجاني داخل الرياض للطلبات التي تتجاوز 1,000 ريال [1]. للمناطق الأخرى تُطبق رسوم توصيل تبدأ من 200 ريال.",
+      "retrieved_doc_ids": ["policy_delivery_en#1"],
+      "ratings": {
+        "meaning_accuracy": 4,
+        "faithfulness": 4,
+        "fluency_ar": 4,
+        "fluency_en": null,
+        "completeness": 3,
+        "citation_quality": 3
+      },
+      "reviewer_notes": "Cross-lingual retrieval succeeded. Free delivery threshold (1,000 SAR in Riyadh) correctly stated. But the response omits the list of cities covered by standard delivery rates and the expedited delivery option."
+    },
+    {
+      "id": "he_030",
+      "category": "mixed_cross_lingual",
+      "query": "ما هو معيار التشفير المستخدم لحماية بيانات العملاء؟",
+      "query_lang": "ar",
+      "source_doc_lang": "en",
+      "retrieval_type": "cross_lingual_ar_to_en",
+      "mode": "smart_ai_search",
+      "generated_answer": "تستخدم HamsAI معيار TLS 1.3 لحماية جميع بيانات العملاء [1].",
+      "retrieved_doc_ids": ["policy_privacy_en#7"],
+      "ratings": {
+        "meaning_accuracy": 3,
+        "faithfulness": 3,
+        "fluency_ar": 3,
+        "fluency_en": null,
+        "completeness": 3,
+        "citation_quality": 3
+      },
+      "reviewer_notes": "Partial answer — the model cited TLS 1.3 (data in transit) but omitted AES-256 (data at rest). This is the same confusion documented in err_004. The question asked for data protection generally, and a complete answer requires both encryption methods."
+    }
+  ]
+}

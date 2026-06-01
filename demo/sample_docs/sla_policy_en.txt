@@ -1,0 +1,54 @@
+HamsAI Support SLA Policy
+==========================
+
+1. Overview
+This document defines the Service Level Agreement (SLA) for all HamsAI technical support tiers. All response and resolution times are measured in business hours (Sunday–Thursday, 09:00–18:00 AST) unless a 24/7 plan is purchased.
+
+2. Support Tiers
+
+2.1 Standard Support (included with all plans)
+- First Response SLA: 24 business hours
+- Resolution SLA: 5 business days
+- Channels: Email only
+- Price: Included
+
+2.2 Gold Support
+- First Response SLA: 8 business hours
+- Resolution SLA: 2 business days
+- Channels: Email + phone
+- Price: 2,500 SAR/month
+
+2.3 Premium Support
+- First Response SLA: 1 hour (Severity 1) / 4 hours (Severity 2) / 8 hours (Severity 3)
+- Resolution SLA: 4 hours (Sev1) / 8 hours (Sev2) / 2 business days (Sev3)
+- Channels: Email + phone + dedicated Slack channel
+- Price: 7,500 SAR/month
+- 24/7 coverage for Severity 1 incidents
+
+2.4 Enterprise Support
+- First Response SLA: 15 minutes (Severity 1) / 2 hours (Severity 2)
+- Resolution SLA: 2 hours (Sev1) / 4 hours (Sev2)
+- Channels: All channels + dedicated named account manager
+- Price: Custom (starting at 25,000 SAR/month)
+- 24/7/365 coverage
+
+3. Severity Definitions
+
+Severity 1 (Critical): Complete system outage or data loss affecting all users. Production environment down.
+Severity 2 (High): Major feature unavailable; significant impact on business operations. Workaround not available.
+Severity 3 (Medium): Feature degraded; partial impact. Workaround available.
+Severity 4 (Low): Minor issue; cosmetic or documentation requests.
+
+4. SLA Credits
+
+If HamsAI fails to meet the agreed SLA, customers are eligible for service credits:
+- Miss by up to 2x the SLA: 5% credit on monthly invoice
+- Miss by 2x–5x: 10% credit
+- Miss by more than 5x: 20% credit
+Maximum credits per month: 30% of monthly subscription fee.
+
+5. Exclusions
+SLA does not apply during scheduled maintenance windows (announced 48 hours in advance), force majeure events, or issues caused by customer-side infrastructure or third-party services.
+
+Effective Date: January 1, 2024
+Version: 2.3

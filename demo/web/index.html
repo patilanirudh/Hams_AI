@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HAMS.AI — Enterprise Knowledge Search</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #EEF1F8;
+  --bg-card:   #FFFFFF;
+  --bg-sub:    #F4F6FB;
+  --bg-muted:  #E6EAF4;
+  --border:    #D8DDED;
+  --border-s:  #E5E9F4;
+  --navy:      #0B1120;
+  --t-pri:     #0B1120;
+  --t-sec:     #596273;
+  --t-muted:   #9CA3AF;
+  --accent:    #3B45E4;
+  --accent-dk: #2E39CC;
+  --accent-s:  #EEF0FD;
+  --green:     #0F9D58;
+  --amber:     #D97706;
+  --red:       #DC2626;
+  --sh-xs:     0 1px 2px rgba(11,17,32,.06);
+  --sh-sm:     0 2px 8px rgba(11,17,32,.09);
+  --sh-card:   0 1px 4px rgba(11,17,32,.07), 0 4px 12px rgba(11,17,32,.05);
+  --r:         10px;
+  --r-lg:      14px;
+  --r-xl:      18px;
+  --font:      'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --sidebar:   234px;
+}
+
+html, body { height: 100%; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--t-pri);
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── TOPBAR ─── */
+
+.topbar {
+  height: 60px;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: stretch;
+  padding: 0 28px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  flex-shrink: 0;
+}
+.tb-left  { display: flex; align-items: center; flex-shrink: 0; margin-right: 32px; }
+.tb-right { display: flex; align-items: center; margin-left: auto; gap: 14px; flex-shrink: 0; }
+
+.logo { text-decoration: none; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; }
+.logo-name { display: flex; align-items: baseline; }
+.l-hams { font-size: 21px; font-weight: 900; color: var(--navy); letter-spacing: -.7px; }
+.l-ai   { font-size: 21px; font-weight: 900; color: var(--accent); letter-spacing: -.7px; }
+.l-wave { display: block; margin-top: 3px; }
+
+.tb-nav {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+.nav-tab {
+  display: flex;
+  align-items: center;
+  padding: 0 22px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--t-sec);
+  background: none;
+  border: none;
+  border-bottom: 2.5px solid transparent;
+  cursor: pointer;
+  transition: color .12s, border-color .12s, background .12s;
+  font-family: var(--font);
+  white-space: nowrap;
+}
+.nav-tab:hover { color: var(--t-pri); background: var(--bg-muted); }
+.nav-tab.active { color: var(--navy); font-weight: 700; border-bottom-color: var(--accent); }
+
+.health-dots { display: flex; align-items: center; gap: 10px; }
+.hi { display: flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 500; color: var(--t-muted); }
+.hdot { width: 6px; height: 6px; border-radius: 50%; background: var(--t-muted); flex-shrink: 0; }
+.hdot.ok  { background: var(--green); }
+.hdot.err { background: var(--red); }
+
+.api-pill {
+  display: flex; align-items: center; gap: 6px;
+  padding: 5px 13px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font-size: 12px; font-weight: 500; color: var(--t-sec);
+}
+
+/* ─── LAYOUT ─── */
+.layout { display: flex; flex: 1; min-height: 0; overflow: hidden; }
+
+/* ─── SIDEBAR ─── */
+.sidebar {
+  width: var(--sidebar);
+  flex-shrink: 0;
+  background: var(--bg);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: 12px 10px;
+  gap: 8px;
+}
+.sb-sec {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 16px;
+  box-shadow: var(--sh-xs);
+}
+.sb-lbl {
+  font-size: 10px; font-weight: 700; letter-spacing: .9px;
+  text-transform: uppercase; color: var(--t-muted); margin-bottom: 12px;
+}
+
+.sess-box { background: var(--bg-sub); border: 1px solid var(--border); border-radius: var(--r); padding: 12px; }
+.sess-val {
+  font-family: 'SF Mono','Fira Code',monospace;
+  font-size: 10.5px; color: var(--accent);
+  margin-bottom: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.btn-row { display: flex; gap: 6px; }
+.sb-btn {
+  flex: 1; padding: 7px 0;
+  font-size: 12px; font-weight: 600; font-family: var(--font);
+  border-radius: 6px; border: 1px solid var(--border);
+  background: var(--bg-card); color: var(--t-sec); cursor: pointer; transition: background .12s;
+}
+.sb-btn:hover { background: var(--bg-muted); }
+
+.ex-list { display: flex; flex-direction: column; gap: 3px; }
+.ex-item {
+  display: flex; align-items: flex-start; gap: 7px;
+  padding: 7px 9px; border-radius: 7px; cursor: pointer;
+  border: 1px solid transparent; transition: all .1s;
+}
+.ex-item:hover { background: var(--bg-sub); border-color: var(--border); }
+.ex-chip {
+  font-size: 9px; font-weight: 700; letter-spacing: .5px;
+  padding: 2px 5px; border-radius: 4px; flex-shrink: 0; margin-top: 2px; line-height: 1.4;
+}
+.ex-chip.ar { background: #FEF3C7; color: #92400E; }
+.ex-chip.en { background: #DBEAFE; color: #1E40AF; }
+.ex-chip.mx { background: #FCE7F3; color: #9D174D; }
+.ex-txt { font-size: 12px; color: var(--t-sec); line-height: 1.4; }
+
+.up-drop {
+  display: flex; flex-direction: column; align-items: center; gap: 5px;
+  padding: 18px 12px; border: 1.5px dashed var(--border); border-radius: var(--r);
+  cursor: pointer; text-align: center; transition: all .15s;
+}
+.up-drop:hover { border-color: var(--accent); background: var(--accent-s); }
+.up-drop input { display: none; }
+.up-ico  { font-size: 22px; }
+.up-main { font-size: 12px; font-weight: 600; color: var(--t-pri); }
+.up-sub  { font-size: 11px; color: var(--t-muted); }
+.up-stat { font-size: 11.5px; margin-top: 8px; display: none; }
+
+/* ─── MAIN ─── */
+.main { flex: 1; min-width: 0; display: flex; flex-direction: column; overflow: hidden; }
+
+.hero-strip { padding: 28px 24px 16px; flex-shrink: 0; }
+.hero-h1 {
+  font-size: 26px; font-weight: 800; color: var(--navy);
+  letter-spacing: -.8px; margin-bottom: 5px; line-height: 1.2;
+}
+.hero-sub { font-size: 13px; color: var(--t-sec); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.hero-pill {
+  font-size: 11px; font-weight: 600; padding: 2px 9px;
+  border-radius: 20px; background: var(--accent-s); color: var(--accent);
+}
+
+/* Search is a white floating card */
+.search-zone { padding: 0 24px 20px; flex-shrink: 0; }
+.search-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 14px;
+  box-shadow: var(--sh-card);
+}
+.s-wrap { display: flex; gap: 10px; align-items: center; }
+.ta-wrap { flex: 1; position: relative; }
+
+textarea#q {
+  width: 100%; min-height: 48px; max-height: 120px;
+  padding: 13px 48px 13px 16px;
+  border: 1.5px solid var(--border-s); border-radius: var(--r);
+  font-family: var(--font); font-size: 14.5px; color: var(--t-pri);
+  background: var(--bg-sub); resize: none; outline: none; line-height: 1.5;
+  transition: border-color .15s, box-shadow .15s, background .15s;
+}
+textarea#q:focus {
+  border-color: var(--accent);
+  background: var(--bg-card);
+  box-shadow: 0 0 0 3px rgba(59,69,228,.08);
+}
+textarea#q::placeholder { color: var(--t-muted); }
+
+.lang-float {
+  position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+  font-size: 10px; font-weight: 700; letter-spacing: .5px;
+  padding: 2px 8px; border-radius: 20px; pointer-events: none;
+}
+.lang-float.ar { background: #FEF3C7; color: #92400E; }
+.lang-float.en { background: #DBEAFE; color: #1D4ED8; }
+.lang-float.mx { background: #FCE7F3; color: #9D174D; }
+
+.s-actions { display: flex; gap: 8px; flex-shrink: 0; }
+.btn-search {
+  height: 48px; padding: 0 22px;
+  background: var(--accent); color: #fff;
+  border: none; border-radius: var(--r);
+  font-family: var(--font); font-size: 14px; font-weight: 700;
+  cursor: pointer; display: flex; align-items: center; gap: 7px;
+  transition: background .12s; white-space: nowrap; letter-spacing: -.1px;
+}
+.btn-search:hover { background: var(--accent-dk); }
+.btn-search:disabled { opacity: .4; cursor: not-allowed; }
+.btn-search svg { width: 14px; height: 14px; }
+
+.btn-clr {
+  height: 48px; padding: 0 16px;
+  background: var(--bg-card); color: var(--t-sec);
+  border: 1.5px solid var(--border); border-radius: var(--r);
+  font-family: var(--font); font-size: 13px; font-weight: 500;
+  cursor: pointer; transition: background .12s;
+}
+.btn-clr:hover { background: var(--bg-sub); }
+
+.results-area {
+  flex: 1; overflow-y: auto;
+  padding: 0 24px 40px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+
+/* ─── EMPTY STATE ─── */
+.empty-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 60px 20px;
+  text-align: center;
+}
+.empty-icon {
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  box-shadow: var(--sh-xs);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+}
+.empty-title { font-size: 15px; font-weight: 600; color: var(--t-pri); }
+.empty-desc  { font-size: 13px; color: var(--t-muted); max-width: 340px; line-height: 1.6; }
+
+/* ─── SPINNER ─── */
+.spin-row { display: none; align-items: center; justify-content: center; gap: 12px; padding: 60px; color: var(--t-muted); font-size: 13px; }
+.spin-row.on { display: flex; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.spin-r { width: 20px; height: 20px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin .7s linear infinite; flex-shrink: 0; }
+
+/* ─── LATENCY BAR ─── */
+.lat-bar { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.lx { display: flex; align-items: center; gap: 3px; font-size: 11.5px; }
+.lx-k { color: var(--t-muted); font-weight: 500; }
+.lx-v { font-family: 'SF Mono','Fira Code',monospace; font-weight: 700; font-size: 11px; }
+.lx-v.fast { color: var(--green); }
+.lx-v.ok   { color: var(--amber); }
+.lx-v.slow { color: var(--red); }
+.lx-sep { color: var(--border-s); margin: 0 2px; }
+
+/* ─── ANSWER CARD ─── */
+.a-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  box-shadow: var(--sh-card);
+}
+.a-hdr {
+  display: flex; align-items: center; gap: 8px;
+  padding: 14px 22px;
+  border-bottom: 1px solid var(--border-s);
+  background: var(--bg-sub);
+  border-radius: var(--r-xl) var(--r-xl) 0 0;
+}
+.lang-pill { font-size: 10px; font-weight: 700; letter-spacing: .5px; padding: 3px 9px; border-radius: 20px; }
+.lang-pill.en    { background: #DBEAFE; color: #1D4ED8; }
+.lang-pill.ar    { background: #FEF3C7; color: #92400E; }
+.lang-pill.mixed { background: #FCE7F3; color: #9D174D; }
+.mode-lbl  { font-size: 12px; font-weight: 500; color: var(--t-sec); }
+.turn-pill { font-size: 11px; font-weight: 700; color: var(--accent); background: var(--accent-s); border-radius: 20px; padding: 2px 9px; }
+.sess-mono { margin-left: auto; font-family: monospace; font-size: 10.5px; color: var(--t-muted); background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 2px 7px; }
+
+.rw-banner {
+  margin: 14px 22px 0;
+  padding: 10px 14px;
+  background: #FFFBEB; border: 1px solid #FDE68A; border-radius: var(--r);
+  font-size: 12px; color: #92400E; display: flex; gap: 6px;
+}
+.rw-lbl { font-weight: 700; flex-shrink: 0; }
+
+.a-body { padding: 22px; }
+.ans-text { font-size: 15px; line-height: 1.8; color: var(--t-pri); white-space: pre-wrap; }
+.ans-text[dir="rtl"] { font-size: 16px; line-height: 2; }
+
+.cite-sup {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 17px; height: 17px; padding: 0 4px;
+  background: var(--accent-s); color: var(--accent);
+  font-size: 10px; font-weight: 700; border-radius: 4px;
+  vertical-align: super; cursor: pointer; margin: 0 1px; font-family: var(--font);
+}
+
+/* Citations */
+.cit-sec { padding: 0 22px 22px; }
+.sec-hdr {
+  font-size: 10.5px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase;
+  color: var(--t-muted); margin-bottom: 10px; padding-top: 14px;
+  border-top: 1px solid var(--border-s);
+}
+.cit-list { display: flex; flex-direction: column; gap: 8px; }
+.cit-row {
+  display: flex; gap: 12px; padding: 12px 14px;
+  background: var(--bg-sub); border: 1px solid var(--border-s);
+  border-radius: var(--r); transition: border-color .12s;
+}
+.cit-row:hover { border-color: var(--accent); }
+.cit-num-box {
+  width: 22px; height: 22px; background: var(--accent); color: #fff;
+  font-size: 10px; font-weight: 700; border-radius: 5px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.cit-body { flex: 1; min-width: 0; }
+.cit-id { font-family: monospace; font-size: 11px; color: var(--accent); font-weight: 600; margin-bottom: 3px; }
+.cit-snip {
+  font-size: 12px; color: var(--t-sec); line-height: 1.5;
+  overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+}
+.cit-tags { margin-top: 5px; display: flex; gap: 10px; }
+.cit-tag  { font-size: 10.5px; color: var(--t-muted); font-weight: 500; }
+
+/* Follow-ups */
+.fu-sec { padding: 0 22px 22px; }
+.fu-list { display: flex; flex-direction: column; gap: 6px; }
+.fu-btn {
+  display: flex; align-items: center; gap: 8px; padding: 10px 14px;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r);
+  cursor: pointer; font-size: 13px; color: var(--t-sec);
+  font-family: var(--font); text-align: left; width: 100%; transition: all .12s;
+}
+.fu-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-s); }
+.fu-arr { color: var(--accent); flex-shrink: 0; }
+
+/* Quick Search */
+.qs-hdr {
+  display: flex; align-items: center; gap: 8px; padding: 12px 22px;
+  border-bottom: 1px solid var(--border-s); background: var(--bg-sub);
+  font-size: 12.5px; color: var(--t-sec);
+}
+.qs-cnt { font-weight: 700; color: var(--t-pri); }
+.qs-body { padding: 12px; display: flex; flex-direction: column; gap: 6px; }
+.qs-row {
+  display: flex; gap: 12px; padding: 13px 15px;
+  border: 1px solid var(--border-s); border-radius: var(--r);
+  background: var(--bg-card); transition: all .12s;
+}
+.qs-row:hover { border-color: var(--accent); background: var(--accent-s); }
+.qs-num {
+  width: 26px; height: 26px; border-radius: 6px;
+  background: var(--bg-sub); border: 1px solid var(--border);
+  color: var(--t-sec); font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.qs-bd { flex: 1; min-width: 0; }
+.qs-t { font-size: 13px; font-weight: 600; color: var(--t-pri); margin-bottom: 3px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.qs-s { font-size: 12px; color: var(--t-sec); line-height: 1.5; }
+.qs-ft { margin-top: 6px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.qs-tag {
+  font-size: 10.5px; color: var(--t-muted);
+  background: var(--bg-sub); border: 1px solid var(--border-s);
+  border-radius: 4px; padding: 1px 6px;
+}
+.qs-sc { margin-left: auto; font-size: 11px; font-weight: 700; color: var(--green); font-family: monospace; }
+
+/* ─── CHAT INTERFACE (Interactive mode) ─── */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-bottom: 24px;
+}
+
+/* User message row */
+.chat-user-row {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 0 4px;
+}
+.chat-user-bubble {
+  max-width: 72%;
+  background: var(--accent);
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 18px 18px 4px 18px;
+  font-size: 14px;
+  line-height: 1.6;
+  word-break: break-word;
+}
+
+/* Rewrite note */
+.rw-il {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 4px 0 8px;
+  padding: 8px 14px;
+  background: #FFFBEB;
+  border: 1px solid #FDE68A;
+  border-radius: var(--r);
+  font-size: 12px;
+  color: #92400E;
+}
+
+/* Assistant response block */
+.chat-asst-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 6px 0 16px;
+}
+
+.chat-turn-meta {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 2px;
+}
+
+/* Thinking spinner inside chat */
+.chat-thinking {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 4px;
+  color: var(--t-muted);
+  font-size: 13px;
+}
+
+/* Divider between turns */
+.chat-divider {
+  height: 1px;
+  background: var(--border-s);
+  margin: 4px 0 8px;
+}
+
+.err-card {
+  background: #FEF2F2; border: 1px solid #FECACA; border-radius: var(--r-lg);
+  padding: 16px 20px; font-size: 13px; color: #991B1B;
+  display: flex; align-items: flex-start; gap: 8px;
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="tb-left">
+    <a class="logo" href="#">
+      <div class="logo-name">
+        <span class="l-hams">HAMS</span><span class="l-ai">.AI</span>
+      </div>
+      <svg class="l-wave" viewBox="0 0 90 14" width="78" height="12" fill="none">
+        <polyline points="0,7 14,7 18,1 22,13 26,7 38,7 43,1 47,13 51,7 63,7 67,4 71,10 75,7 90,7"
+          stroke="#3B45E4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+
+  <nav class="tb-nav">
+    <button class="nav-tab active" data-mode="quick_search">Quick Search</button>
+    <button class="nav-tab" data-mode="smart_ai_search">Smart AI Search</button>
+    <button class="nav-tab" data-mode="interactive">Interactive AI</button>
+  </nav>
+
+  <div class="tb-right">
+    <div class="health-dots" id="healthRow">
+      <div class="hi"><span class="hdot" id="h-es"></span>ES</div>
+      <div class="hi"><span class="hdot" id="h-qdrant"></span>Qdrant</div>
+      <div class="hi"><span class="hdot" id="h-redis"></span>Redis</div>
+      <div class="hi"><span class="hdot" id="h-embed"></span>Embed</div>
+    </div>
+    <div class="api-pill">
+      <span class="hdot" id="apiDot"></span>
+      <span id="apiStatus">Connecting…</span>
+    </div>
+  </div>
+</header>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sb-sec" id="sessionSection" style="display:none">
+      <div class="sb-lbl">Session</div>
+      <div class="sess-box">
+        <div class="sess-val" id="sessionId">new session</div>
+        <div class="btn-row">
+          <button class="sb-btn" onclick="newSession()">New</button>
+          <button class="sb-btn" onclick="clearHistory()">Clear</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="sb-sec">
+      <div class="sb-lbl">Try an example</div>
+      <div class="ex-list" id="exampleList"></div>
+    </div>
+
+    <div class="sb-sec">
+      <div class="sb-lbl">Ingest Document</div>
+      <label class="up-drop">
+        <input type="file" id="fileInput" accept=".pdf,.docx,.txt,.html">
+        <div class="up-ico">📄</div>
+        <div class="up-main">Drop file or click</div>
+        <div class="up-sub">PDF · DOCX · TXT · HTML</div>
+      </label>
+      <div class="up-stat" id="uploadStatus"></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="hero-strip" id="heroStrip">
+      <h1 class="hero-h1">Search your knowledge base</h1>
+      <p class="hero-sub">
+        BM25 keyword retrieval &nbsp;·&nbsp; under 100 ms
+        <span class="hero-pill">Quick Search</span>
+      </p>
+    </div>
+
+    <div class="search-zone">
+      <div class="search-card">
+        <div class="s-wrap">
+          <div class="ta-wrap">
+            <textarea id="q" rows="1" placeholder="Ask in Arabic or English — سؤالك هنا…"></textarea>
+            <span class="lang-float" id="langFloat"></span>
+          </div>
+          <div class="s-actions">
+            <button class="btn-search" id="searchBtn" onclick="doSearch()">
+              Search
+              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="6" cy="6" r="4"/><line x1="9.5" y1="9.5" x2="13" y2="13"/>
+              </svg>
+            </button>
+            <button class="btn-clr" onclick="clearAll()">Clear</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="results-area" id="resultsArea"></div>
+  </main>
+</div>
+
+<script>
+const API = '';
+let mode = 'quick_search';
+let sessionId = 'new';
+let chatHistory = [];
+
+const MODE_META = {
+  quick_search:    { h: 'Search your knowledge base',       sub: 'BM25 keyword retrieval · under 100 ms',                  pill: 'Quick Search' },
+  smart_ai_search: { h: 'Ask your knowledge base',           sub: 'Hybrid RAG · LLM-synthesized answers · cited sources',    pill: 'Smart AI Search' },
+  interactive:     { h: 'Converse with your knowledge base', sub: 'Multi-turn dialogue · session memory · query rewriting',  pill: 'Interactive AI' },
+};
+
+const EXAMPLES = {
+  quick_search: [
+    { lang:'ar', text:'سياسة الاسترجاع' },
+    { lang:'en', text:'SLA premium support' },
+    { lang:'ar', text:'رسوم التركيب' },
+    { lang:'en', text:'warranty period' },
+    { lang:'mx', text:'pricing الباقة المؤسسية' },
+  ],
+  smart_ai_search: [
+    { lang:'ar', text:'ما هي سياسة الاسترجاع للطلبات المتأخرة؟' },
+    { lang:'en', text:'What is the Severity 1 SLA response time?' },
+    { lang:'mx', text:'أبغى أعرف الـ pricing للباقة المؤسسية' },
+    { lang:'en', text:'What encryption standard is used for data at rest?' },
+    { lang:'ar', text:'كم مدة الضمان على الأجهزة التقنية؟' },
+  ],
+  interactive: [
+    { lang:'ar', text:'ما هي خطط الدعم الفني المتاحة؟' },
+    { lang:'en', text:'Tell me about enterprise pricing plans' },
+    { lang:'ar', text:'كم مدة الضمان على المنتجات؟' },
+    { lang:'en', text:'What is the Severity 1 SLA?' },
+  ],
+};
+
+const EMPTY_HTML = `
+  <div class="empty-state">
+    <div class="empty-icon">🔎</div>
+    <div class="empty-title">Ready to search</div>
+    <div class="empty-desc">Type a question in Arabic or English and press Search, or pick an example from the sidebar.</div>
+  </div>
+  <div class="spin-row" id="spinner"><div class="spin-r"></div>Searching knowledge bank…</div>`;
+
+function initResults() { document.getElementById('resultsArea').innerHTML = EMPTY_HTML; }
+
+document.querySelectorAll('.nav-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    mode = btn.dataset.mode;
+    document.getElementById('sessionSection').style.display = mode === 'interactive' ? 'block' : 'none';
+    const m = MODE_META[mode];
+    document.getElementById('heroStrip').innerHTML =
+      `<h1 class="hero-h1">${m.h}</h1>
+       <p class="hero-sub">${m.sub}<span class="hero-pill">${m.pill}</span></p>`;
+    renderExamples();
+    initResults();
+  });
+});
+
+function renderExamples() {
+  document.getElementById('exampleList').innerHTML = (EXAMPLES[mode]||[]).map(ex =>
+    `<div class="ex-item" onclick="fillQ(this.dataset.q)" data-q="${ex.text.replace(/"/g,'&quot;')}">
+      <span class="ex-chip ${ex.lang}">${ex.lang.toUpperCase()}</span>
+      <span class="ex-txt">${ex.text}</span>
+    </div>`
+  ).join('');
+}
+
+function fillQ(text) { document.getElementById('q').value = text; updateLang(text); }
+
+function detectLang(t) {
+  const ar = (t.match(/[؀-ۿ]/g)||[]).length;
+  const en = (t.match(/[a-zA-Z]/g)||[]).length;
+  if (!ar && !en) return 'en';
+  const r = ar / (ar + en);
+  return r > 0.65 ? 'ar' : r < 0.3 ? 'en' : 'mx';
+}
+
+function updateLang(text) {
+  const el = document.getElementById('langFloat');
+  if (!text.trim()) { el.textContent = ''; el.className = 'lang-float'; return; }
+  const lang = detectLang(text);
+  el.textContent = lang === 'ar' ? 'عربي' : lang === 'mx' ? 'MX' : 'EN';
+  el.className = `lang-float ${lang}`;
+}
+
+document.getElementById('q').addEventListener('input', e => updateLang(e.target.value));
+document.getElementById('q').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) doSearch();
+});
+
+function getChatContainer() {
+  let c = document.getElementById('chatContainer');
+  if (!c) {
+    document.getElementById('resultsArea').innerHTML = '<div id="chatContainer" class="chat-container"></div>';
+    c = document.getElementById('chatContainer');
+  }
+  return c;
+}
+
+function newSession() {
+  sessionId = 'new';
+  chatHistory = [];
+  document.getElementById('sessionId').textContent = 'new session';
+  initResults();
+}
+function clearHistory() {
+  chatHistory = [];
+  initResults();
+}
+
+async function doSearch() {
+  const q = document.getElementById('q').value.trim();
+  if (!q) return;
+  const btn = document.getElementById('searchBtn');
+  btn.disabled = true;
+
+  try {
+    let data;
+    if (mode === 'quick_search') {
+      document.getElementById('resultsArea').innerHTML =
+        `<div class="spin-row on"><div class="spin-r"></div>Searching knowledge bank…</div>`;
+      data = await post('/search/quick', { query: q, top_k: 10 });
+      renderQuick(data);
+
+    } else if (mode === 'smart_ai_search') {
+      document.getElementById('resultsArea').innerHTML =
+        `<div class="spin-row on"><div class="spin-r"></div>Searching knowledge bank…</div>`;
+      data = await post('/search/smart', { query: q, top_k: 3 });
+      renderSmart(data);
+
+    } else {
+      // ── INTERACTIVE: append to persistent chat ──
+      const container = getChatContainer();
+
+      // 1. Show user bubble immediately
+      const userRow = document.createElement('div');
+      userRow.className = 'chat-user-row';
+      userRow.innerHTML = `<div class="chat-user-bubble">${q.replace(/&/g,'&amp;').replace(/</g,'&lt;')}</div>`;
+      container.appendChild(userRow);
+
+      // 2. Show thinking spinner
+      const thinkDiv = document.createElement('div');
+      thinkDiv.className = 'chat-thinking';
+      thinkDiv.innerHTML = '<div class="spin-r"></div><span>Thinking…</span>';
+      container.appendChild(thinkDiv);
+      scrollBottom();
+
+      // 3. Fetch response
+      data = await post('/search/interactive', { query: q, session_id: sessionId });
+      thinkDiv.remove();
+
+      if (data.session_id) {
+        sessionId = data.session_id;
+        document.getElementById('sessionId').textContent = data.session_id;
+      }
+      chatHistory.push({ user: q, assistant: data.answer || '' });
+      appendTurn(container, q, data);
+    }
+  } catch(e) {
+    if (mode === 'interactive') {
+      const container = getChatContainer();
+      const errDiv = document.createElement('div');
+      errDiv.className = 'err-card';
+      errDiv.textContent = '⚠ ' + e.message;
+      container.appendChild(errDiv);
+      scrollBottom();
+    } else {
+      document.getElementById('resultsArea').innerHTML = `<div class="err-card">⚠ ${e.message}</div>`;
+    }
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+async function post(path, body) {
+  const r = await fetch(API + path, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
+  if (!r.ok) { const e = await r.json().catch(()=>({})); throw new Error(e.detail || `HTTP ${r.status}`); }
+  return r.json();
+}
+
+function clearAll() {
+  document.getElementById('q').value = '';
+  document.getElementById('langFloat').textContent = '';
+  if (mode === 'interactive') { chatHistory = []; }
+  initResults();
+}
+
+function latClass(ms, f, o) { return ms <= f ? 'fast' : ms <= o ? 'ok' : 'slow'; }
+function latBar(lat, m) {
+  if (!lat) return '';
+  const items = [];
+  const add = (k, v, f, o) => items.push(`<div class="lx"><span class="lx-k">${k}</span><span class="lx-v ${latClass(v,f,o)}">${v}ms</span></div>`);
+  if (lat.query_rewrite       != null) add('rewrite',  lat.query_rewrite,       200, 500);
+  if (lat.preprocessing       != null) add('preproc',  lat.preprocessing,       20,  60);
+  if (lat.retrieval           != null) add('retrieval', lat.retrieval,          150, 400);
+  if (lat.rerank              != null) add('rerank',    lat.rerank,             200, 5000);
+  if (lat.search              != null) add('search',    lat.search,             60,  150);
+  if (lat.time_to_first_token != null) add('TTFT',      lat.time_to_first_token, 1500, 3000);
+  if (lat.generation_total    != null) add('gen',       lat.generation_total,   3000, 6000);
+  const tf = m === 'quick_search' ? 100 : 4000;
+  const to = m === 'quick_search' ? 200 : 8000;
+  if (lat.total != null) add('total', lat.total, tf, to);
+  return `<div class="lat-bar">${items.join('<span class="lx-sep">·</span>')}</div>`;
+}
+
+function langPill(lang) {
+  const cls = lang === 'ar' ? 'ar' : lang === 'en' ? 'en' : 'mixed';
+  const lbl = lang === 'ar' ? 'Arabic' : lang === 'en' ? 'English' : 'Mixed';
+  return `<span class="lang-pill ${cls}">${lbl}</span>`;
+}
+
+function fmtAnswer(text) {
+  return text.replace(/\[(\d+)\]/g, '<span class="cite-sup" title="Citation $1">$1</span>');
+}
+
+function citsHTML(citations) {
+  if (!citations?.length) return '';
+  return `<div class="cit-sec">
+    <div class="sec-hdr">Sources</div>
+    <div class="cit-list">
+      ${citations.map(c => `
+        <div class="cit-row">
+          <div class="cit-num-box">${c.id}</div>
+          <div class="cit-body">
+            <div class="cit-id">${c.chunk_id || c.doc_id}</div>
+            <div class="cit-snip">${c.snippet}</div>
+            <div class="cit-tags">
+              <span class="cit-tag">Page ${c.page ?? '—'}</span>
+              <span class="cit-tag">relevance ${c.relevance ?? '—'}</span>
+            </div>
+          </div>
+        </div>`).join('')}
+    </div>
+  </div>`;
+}
+
+function fuHTML(items) {
+  if (!items?.length) return '';
+  return `<div class="fu-sec">
+    <div class="sec-hdr">Suggested follow-ups</div>
+    <div class="fu-list">
+      ${items.map(f => `<button class="fu-btn" onclick="fillQ(this.dataset.q)" data-q="${f.replace(/"/g,'&quot;')}"><span class="fu-arr">→</span>${f}</button>`).join('')}
+    </div>
+  </div>`;
+}
+
+function scrollBottom() {
+  const ra = document.getElementById('resultsArea');
+  if (ra) ra.scrollTop = ra.scrollHeight;
+}
+
+function renderQuick(data) {
+  const results = data.results || [];
+  const cards = results.map((r, i) => `
+    <div class="qs-row">
+      <div class="qs-num">${i+1}</div>
+      <div class="qs-bd">
+        <div class="qs-t">${r.title || r.doc_id}</div>
+        <div class="qs-s">${r.snippet}</div>
+        <div class="qs-ft">
+          <span class="qs-tag">${r.source || r.doc_id}</span>
+          <span class="qs-tag">p.${r.page}</span>
+          <span class="qs-tag">${r.chunk_id}</span>
+          <span class="qs-sc">↑ ${r.score?.toFixed(2)}</span>
+        </div>
+      </div>
+    </div>`).join('');
+
+  document.getElementById('resultsArea').innerHTML = `
+    <div class="a-card">
+      <div class="qs-hdr">
+        ${langPill(data.language_detected)}
+        <span><span class="qs-cnt">${results.length}</span> results</span>
+        <span style="margin-left:auto">${latBar(data.latency_ms,'quick_search')}</span>
+      </div>
+      <div class="qs-body">
+        ${results.length ? cards : '<div style="padding:24px;text-align:center;color:#9CA3AF;font-size:13px">No results found</div>'}
+      </div>
+    </div>`;
+  scrollBottom();
+}
+
+function renderSmart(data) {
+  const isAr = data.language_detected === 'ar';
+  document.getElementById('resultsArea').innerHTML = `
+    ${latBar(data.latency_ms,'smart_ai_search')}
+    <div class="a-card">
+      <div class="a-hdr">
+        ${langPill(data.language_detected)}
+        <span class="mode-lbl">Smart AI Search</span>
+      </div>
+      <div class="a-body">
+        <div class="ans-text" dir="${isAr?'rtl':'ltr'}">${fmtAnswer(data.answer||'')}</div>
+      </div>
+      ${citsHTML(data.citations)}
+    </div>`;
+  scrollBottom();
+}
+
+function appendTurn(container, userMsg, data) {
+  const isAr = data.language_detected === 'ar';
+
+  // Divider between turns (skip on first)
+  if (chatHistory.length > 1) {
+    const div = document.createElement('div');
+    div.className = 'chat-divider';
+    container.appendChild(div);
+  }
+
+  // Rewrite notice (only if meaningful)
+  if (data.query_rewritten && data.query_rewritten !== userMsg) {
+    const rw = document.createElement('div');
+    rw.className = 'rw-il';
+    rw.innerHTML = `<span class="rw-lbl">Rewritten:</span><span>${data.query_rewritten}</span>`;
+    container.appendChild(rw);
+  }
+
+  // Assistant block: meta row + answer card + latency
+  const block = document.createElement('div');
+  block.className = 'chat-asst-block';
+  block.innerHTML = `
+    <div class="chat-turn-meta">
+      ${langPill(data.language_detected)}
+      <span class="mode-lbl">Interactive AI</span>
+      <span class="turn-pill">Turn ${data.turn}</span>
+      <span class="sess-mono">${data.session_id}</span>
+    </div>
+    <div class="a-card">
+      <div class="a-body">
+        <div class="ans-text" dir="${isAr?'rtl':'ltr'}">${fmtAnswer(data.answer||'')}</div>
+      </div>
+      ${citsHTML(data.citations)}
+      ${fuHTML(data.suggested_followups)}
+    </div>
+    ${latBar(data.latency_ms,'interactive')}`;
+  container.appendChild(block);
+  scrollBottom();
+}
+
+async function checkHealth() {
+  try {
+    const d = await fetch(API + '/health').then(r => r.json());
+    document.getElementById('apiDot').className = 'hdot ok';
+    document.getElementById('apiStatus').textContent = 'API Online';
+    const map = { 'h-es': d.elasticsearch, 'h-qdrant': d.qdrant, 'h-redis': d.redis, 'h-embed': d.embedding_model };
+    Object.entries(map).forEach(([id, v]) => {
+      const el = document.getElementById(id);
+      if (el) el.className = 'hdot ' + (v === 'connected' || v === 'loaded' ? 'ok' : 'err');
+    });
+  } catch {
+    document.getElementById('apiDot').className = 'hdot err';
+    document.getElementById('apiStatus').textContent = 'API Offline';
+  }
+}
+
+document.getElementById('fileInput').addEventListener('change', async e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const s = document.getElementById('uploadStatus');
+  s.style.display = 'block'; s.style.color = '#596273';
+  s.textContent = `Uploading ${file.name}…`;
+  const form = new FormData();
+  form.append('file', file);
+  try {
+    const r = await fetch(API + '/ingest/file', { method: 'POST', body: form });
+    const d = await r.json();
+    s.style.color = '#0F9D58';
+    s.textContent = `✓ ${d.message || 'Queued for ingestion'}`;
+  } catch(err) {
+    s.style.color = '#DC2626';
+    s.textContent = `✗ ${err.message}`;
+  }
+});
+
+renderExamples();
+initResults();
+checkHealth();
+setInterval(checkHealth, 30000);
+</script>
+</body>
+</html>

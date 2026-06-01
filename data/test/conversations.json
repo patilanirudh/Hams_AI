@@ -1,0 +1,514 @@
+{
+  "conversations": [
+    {
+      "conversation_id": "conv_001",
+      "topic": "returns",
+      "turns": [
+        {
+          "turn": 1,
+          "user": "ما الشرط الذي ينطبق على العميل حسب سياسة الاسترجاع والاستبدال - قسم 1؟",
+          "standalone_query": "ما الشرط الذي ينطبق على العميل حسب سياسة الاسترجاع والاستبدال - قسم 1؟",
+          "expected_answer": "توجد الإجابة في المستند returns_ar_001: ينطبق قسم سياسة الاسترجاع والاستبدال رقم 1 على عملاء نظام HamsAI Core CRM في جدة. القاعدة الأساسية الخاصة بـ مهلة الاسترجاع هي 3 أيام عمل، بينما تكون مهلة استرداد المبلغ 7 أيام عمل من تاريخ قبول الطلب. يجب على العميل إرسال الطلب من خلال بوابة. المصدر: returns_ar_001#0",
+          "source_doc_id": "returns_ar_001",
+          "positive_chunk_id": "returns_ar_001#0",
+          "lang": "ar"
+        },
+        {
+          "turn": 2,
+          "user": "Summarize the policy policy in this document.",
+          "standalone_query": "Summarize the policy policy in this document.",
+          "expected_answer": "The answer is in document returns_en_001: Returns and Exchange Policy section 1 applies to HamsAI Core CRM customers in Jeddah. The primary rule for return window is 2 business days, while the escalation or completion target for refund is 5 business days. Customers must submit the request through the HamsAI portal. Source: returns_en_001#0",
+          "source_doc_id": "returns_en_001",
+          "positive_chunk_id": "returns_en_001#0",
+          "lang": "en"
+        },
+        {
+          "turn": 3,
+          "user": "ما الشرط الذي ينطبق على العميل حسب سياسة الاسترجاع والاستبدال - Returns and Exchange Policy 1؟",
+          "standalone_query": "ما الشرط الذي ينطبق على العميل حسب سياسة الاسترجاع والاستبدال - Returns and Exchange Policy 1؟",
+          "expected_answer": "توجد الإجابة في المستند returns_mixed_001: يوضح هذا المستند المختلط Mixed Policy رقم 1 قواعد سياسة الاسترجاع والاستبدال الخاصة بـ نظام HamsAI Core CRM / HamsAI Core CRM. The operational threshold for defect is 25 requests per month (٢٥ طلب)، and the fee for exceeding it is SAR 410. يجب استخدام. المصدر: returns_mixed_001#0",
+          "source_doc_id": "returns_mixed_001",
+          "positive_chunk_id": "returns_mixed_001#0",
+          "lang": "ar"
+        },
+        {
+          "turn": 4,
+          "user": "Which customer condition applies according to سياسة الاسترجاع والاستبدال - قسم 2?",
+          "standalone_query": "Which customer condition applies according to سياسة الاسترجاع والاستبدال - قسم 2?",
+          "expected_answer": "The answer is in document returns_ar_002: ينطبق قسم سياسة الاسترجاع والاستبدال رقم 2 على عملاء مكتب HamsAI SmartDesk في الدمام. القاعدة الأساسية الخاصة بـ مهلة الاسترجاع هي 4 أيام عمل، بينما تكون مهلة استرداد المبلغ 8 أيام عمل من تاريخ قبول الطلب. يجب على العميل إرسال الطلب من خلال بوابة HamsAI. Source: returns_ar_002#0",
+          "source_doc_id": "returns_ar_002",
+          "positive_chunk_id": "returns_ar_002#0",
+          "lang": "en"
+        },
+        {
+          "turn": 5,
+          "user": "ما الشرط الذي ينطبق على العميل حسب Returns and Exchange Policy - Section 2؟",
+          "standalone_query": "ما الشرط الذي ينطبق على العميل حسب Returns and Exchange Policy - Section 2؟",
+          "expected_answer": "توجد الإجابة في المستند returns_en_002: Returns and Exchange Policy section 2 applies to HamsAI SmartDesk customers in Dammam. The primary rule for return window is 3 business days, while the escalation or completion target for refund is 6 business days. Customers must submit the request through the HamsAI portal and. المصدر: returns_en_002#0",
+          "source_doc_id": "returns_en_002",
+          "positive_chunk_id": "returns_en_002#0",
+          "lang": "ar"
+        }
+      ]
+    },
+    {
+      "conversation_id": "conv_002",
+      "topic": "sla",
+      "turns": [
+        {
+          "turn": 1,
+          "user": "What fee, date, or deadline is stated in sla_ar_001?",
+          "standalone_query": "What fee, date, or deadline is stated in sla_ar_001?",
+          "expected_answer": "The answer is in document sla_ar_001: ينطبق قسم اتفاقية مستوى الخدمة للدعم الفني رقم 1 على عملاء نظام HamsAI Core CRM في جدة. القاعدة الأساسية الخاصة بـ الأولوية الحرجة هي 3 أيام عمل، بينما تكون مهلة وقت الاستجابة 7 أيام عمل من تاريخ قبول الطلب. يجب على العميل إرسال الطلب من. Source: sla_ar_001#0",
+          "source_doc_id": "sla_ar_001",
+          "positive_chunk_id": "sla_ar_001#0",
+          "lang": "en"
+        },
+        {
+          "turn": 2,
+          "user": "ما الشرط الذي ينطبق على العميل حسب Technical Support SLA - Section 1؟",
+          "standalone_query": "ما الشرط الذي ينطبق على العميل حسب Technical Support SLA - Section 1؟",
+          "expected_answer": "توجد الإجابة في المستند sla_en_001: Technical Support SLA section 1 applies to HamsAI Core CRM customers in Jeddah. The primary rule for Severity 1 is 2 business days, while the escalation or completion target for first response is 5 business days. Customers must submit the request through the HamsAI portal. المصدر: sla_en_001#0",
+          "source_doc_id": "sla_en_001",
+          "positive_chunk_id": "sla_en_001#0",
+          "lang": "ar"
+        },
+        {
+          "turn": 3,
+          "user": "What fee, date, or deadline is stated in sla_mixed_001?",
+          "standalone_query": "What fee, date, or deadline is stated in sla_mixed_001?",
+          "expected_answer": "The answer is in document sla_mixed_001: يوضح هذا المستند المختلط Mixed Policy رقم 1 قواعد اتفاقية مستوى الخدمة للدعم الفني الخاصة بـ نظام HamsAI Core CRM / HamsAI Core CRM. The operational threshold for resolution time is 25 requests per month (٢٥ طلب)، and the fee for exceeding it is SAR. Source: sla_mixed_001#0",
+          "source_doc_id": "sla_mixed_001",
+          "positive_chunk_id": "sla_mixed_001#0",
+          "lang": "en"
+        },
+        {
+          "turn": 4,
+          "user": "كم تبلغ الرسوم أو المهلة المذكورة في sla_ar_002؟",
+          "standalone_query": "كم تبلغ الرسوم أو المهلة المذكورة في sla_ar_002؟",
+          "expected_answer": "توجد الإجابة في المستند sla_ar_002: ينطبق قسم اتفاقية مستوى الخدمة للدعم الفني رقم 2 على عملاء مكتب HamsAI SmartDesk في الدمام. القاعدة الأساسية الخاصة بـ الأولوية الحرجة هي 4 أيام عمل، بينما تكون مهلة وقت الاستجابة 8 أيام عمل من تاريخ قبول الطلب. يجب على العميل إرسال الطلب من خلال. المصدر: sla_ar_002#0",
+          "source_doc_id": "sla_ar_002",
+          "positive_chunk_id": "sla_ar_002#0",
+          "lang": "ar"
+        },
+        {
+          "turn": 5,
+          "user": "What is the main rule in Technical Support SLA - Section 2?",
+          "standalone_query": "What is the main rule in Technical Support SLA - Section 2?",
+          "expected_answer": "The answer is in document sla_en_002: Technical Support SLA section 2 applies to HamsAI SmartDesk customers in Dammam. The primary rule for Severity 1 is 3 business days, while the escalation or completion target for first response is 6 business days. Customers must submit the request through the HamsAI portal and. Source: sla_en_002#0",
+          "source_doc_id": "sla_en_002",
+          "positive_chunk_id": "sla_en_002#0",
+          "lang": "en"
+        }
+      ]
+    },
+    {
+      "conversation_id": "conv_003",
+      "topic": "pricing",
+      "turns": [
+        {
+          "turn": 1,
+          "user": "اشرح سياسة commercial المرتبطة بهذا المستند.",
+          "standalone_query": "اشرح سياسة commercial المرتبطة بهذا المستند.",
+          "expected_answer": "توجد الإجابة في المستند pricing_ar_001: ينطبق قسم أسعار الاشتراكات والباقات رقم 1 على عملاء نظام HamsAI Core CRM في جدة. القاعدة الأساسية الخاصة بـ باقة SaaS Pro هي 3 أيام عمل، بينما تكون مهلة باقة المؤسسات 7 أيام عمل من تاريخ قبول الطلب. يجب على العميل إرسال الطلب من خلال. المصدر: pricing_ar_001#0",
+          "source_doc_id": "pricing_ar_001",
+          "positive_chunk_id": "pricing_ar_001#0",
+          "lang": "ar"
+        },
+        {
+          "turn": 2,
+          "user": "Summarize the commercial policy in this document.",
+          "standalone_query": "Summarize the commercial policy in this document.",
+          "expected_answer": "The answer is in document pricing_en_001: Subscription Pricing section 1 applies to HamsAI Core CRM customers in Jeddah. The primary rule for SaaS Pro is 2 business days, while the escalation or completion target for Enterprise Suite is 5 business days. Customers must submit the request through the HamsAI portal and. Source: pricing_en_001#0",
+          "source_doc_id": "pricing_en_001",
+          "positive_chunk_id": "pricing_en_001#0",
+          "lang": "en"
+        },
+        {
+          "turn": 3,
+          "user": "ما الشرط الذي ينطبق على العميل حسب أسعار الاشتراكات والباقات - Subscription Pricing 1؟",
+          "standalone_query": "ما الشرط الذي ينطبق على العميل حسب أسعار الاشتراكات والباقات - Subscription Pricing 1؟",
+          "expected_answer": "توجد الإجابة في المستند pricing_mixed_001: يوضح هذا المستند المختلط Mixed Policy رقم 1 قواعد أسعار الاشتراكات والباقات الخاصة بـ نظام HamsAI Core CRM / HamsAI Core CRM. The operational threshold for additional user is 25 requests per month (٢٥ طلب)، and the fee for exceeding it is SAR 410. يجب. المصدر: pricing_mixed_001#0",
+          "source_doc_id": "pricing_mixed_001",
+          "positive_chunk_id": "pricing_mixed_001#0",
+          "lang": "ar"
+        },
+        {
+          "turn": 4,
+          "user": "Which customer condition applies according to أسعار الاشتراكات والباقات - قسم 2?",
+          "standalone_query": "Which customer condition applies according to أسعار الاشتراكات والباقات - قسم 2?",
+          "expected_answer": "The answer is in document pricing_ar_002: ينطبق قسم أسعار الاشتراكات والباقات رقم 2 على عملاء مكتب HamsAI SmartDesk في الدمام. القاعدة الأساسية الخاصة بـ باقة SaaS Pro هي 4 أيام عمل، بينما تكون مهلة باقة المؤسسات 8 أيام عمل من تاريخ قبول الطلب. يجب على العميل إرسال الطلب من خلال بوابة. Source: pricing_ar_002#0",
+          "source_doc_id": "pricing_ar_002",
+          "positive_chunk_id": "pricing_ar_002#0",
+          "lang": "en"
+        },
+        {
+          "turn": 5,
+          "user": "ما الشرط الذي ينطبق على العميل حسب Subscription Pricing - Section 2؟",
+          "standalone_query": "ما الشرط الذي ينطبق على العميل حسب Subscription Pricing - Section 2؟",
+          "expected_answer": "توجد الإجابة في المستند pricing_en_002: Subscription Pricing section 2 applies to HamsAI SmartDesk customers in Dammam. The primary rule for SaaS Pro is 3 business days, while the escalation or completion target for Enterprise Suite is 6 business days. Customers must submit the request through the HamsAI portal and include. المصدر: pricing_en_002#0",
+          "source_doc_id": "pricing_en_002",
+          "positive_chunk_id": "pricing_en_002#0",
+          "lang": "ar"
+        }
+      ]
+    },
+    {
+      "conversation_id": "conv_004",
+      "topic": "warranty",
+      "turns": [
+        {
+          "turn": 1,
+          "user": "Summarize the hardware policy in this document.",
+          "standalone_query": "Summarize the hardware policy in this document.",
+          "expected_answer": "The answer is in document warranty_ar_001: ينطبق قسم ضمان الأجهزة والأثاث رقم 1 على عملاء نظام HamsAI Core CRM في جدة. القاعدة الأساسية الخاصة بـ الضمان المحدود هي 3 أيام عمل، بينما تكون مهلة تمديد الضمان 7 أيام عمل من تاريخ قبول الطلب. يجب على العميل إرسال الطلب من خلال بوابة. Source: warranty_ar_001#0",
+          "source_doc_id": "warranty_ar_001",
+          "positive_chunk_id": "warranty_ar_001#0",
+          "lang": "en"
+        },
+        {
+          "turn": 2,
+          "user": "اشرح سياسة hardware المرتبطة بهذا المستند.",
+          "standalone_query": "اشرح سياسة hardware المرتبطة بهذا المستند.",
+          "expected_answer": "توجد الإجابة في المستند warranty_en_001: Hardware and Furniture Warranty section 1 applies to HamsAI Core CRM customers in Jeddah. The primary rule for limited warranty is 2 business days, while the escalation or completion target for extended warranty is 5 business days. Customers must submit the request through the HamsAI. المصدر: warranty_en_001#0",
+          "source_doc_id": "warranty_en_001",
+          "positive_chunk_id": "warranty_en_001#0",
+          "lang": "ar"
+        },
+        {
+          "turn": 3,
+          "user": "What is the main rule in ضمان الأجهزة والأثاث - Hardware and Furniture Warranty 1?",
+          "standalone_query": "What is the main rule in ضمان الأجهزة والأثاث - Hardware and Furniture Warranty 1?",
+          "expected_answer": "The answer is in document warranty_mixed_001: يوضح هذا المستند المختلط Mixed Policy رقم 1 قواعد ضمان الأجهزة والأثاث الخاصة بـ نظام HamsAI Core CRM / HamsAI Core CRM. The operational threshold for technician visit is 25 requests per month (٢٥ طلب)، and the fee for exceeding it is SAR 410. يجب. Source: warranty_mixed_001#0",
+          "source_doc_id": "warranty_mixed_001",
+          "positive_chunk_id": "warranty_mixed_001#0",
+          "lang": "en"
+        },
+        {
+          "turn": 4,
+          "user": "ما الشرط الذي ينطبق على العميل حسب ضمان الأجهزة والأثاث - قسم 2؟",
+          "standalone_query": "ما الشرط الذي ينطبق على العميل حسب ضمان الأجهزة والأثاث - قسم 2؟",
+          "expected_answer": "توجد الإجابة في المستند warranty_ar_002: ينطبق قسم ضمان الأجهزة والأثاث رقم 2 على عملاء مكتب HamsAI SmartDesk في الدمام. القاعدة الأساسية الخاصة بـ الضمان المحدود هي 4 أيام عمل، بينما تكون مهلة تمديد الضمان 8 أيام عمل من تاريخ قبول الطلب. يجب على العميل إرسال الطلب من خلال بوابة HamsAI. المصدر: warranty_ar_002#0",
+          "source_doc_id": "warranty_ar_002",
+          "positive_chunk_id": "warranty_ar_002#0",
+          "lang": "ar"
+        },
+        {
+          "turn": 5,
+          "user": "Which customer condition applies according to Hardware and Furniture Warranty - Section 2?",
+          "standalone_query": "Which customer condition applies according to Hardware and Furniture Warranty - Section 2?",
+          "expected_answer": "The answer is in document warranty_en_002: Hardware and Furniture Warranty section 2 applies to HamsAI SmartDesk customers in Dammam. The primary rule for limited warranty is 3 business days, while the escalation or completion target for extended warranty is 6 business days. Customers must submit the request through the HamsAI portal. Source: warranty_en_002#0",
+          "source_doc_id": "warranty_en_002",
+          "positive_chunk_id": "warranty_en_002#0",
+          "lang": "en"
+        }
+      ]
+    },
+    {
+      "conversation_id": "conv_005",
+      "topic": "delivery",
+      "turns": [
+        {
+          "turn": 1,
+          "user": "ما هي القاعدة الأساسية في مستند التوصيل والتركيب - قسم 1؟",
+          "standalone_query": "ما هي القاعدة الأساسية في مستند التوصيل والتركيب - قسم 1؟",
+          "expected_answer": "توجد الإجابة في المستند delivery_ar_001: ينطبق قسم التوصيل والتركيب رقم 1 على عملاء نظام HamsAI Core CRM في جدة. القاعدة الأساسية الخاصة بـ التركيب هي 3 أيام عمل، بينما تكون مهلة جاهزية الموقع 7 أيام عمل من تاريخ قبول الطلب. يجب على العميل إرسال الطلب من خلال بوابة HamsAI مع. المصدر: delivery_ar_001#0",
+          "source_doc_id": "delivery_ar_001",
+          "positive_chunk_id": "delivery_ar_001#0",
+          "lang": "ar"
+        },
+        {
+          "turn": 2,
+          "user": "What fee, date, or deadline is stated in delivery_en_001?",
+          "standalone_query": "What fee, date, or deadline is stated in delivery_en_001?",
+          "expected_answer": "The answer is in document delivery_en_001: Delivery and Installation section 1 applies to HamsAI Core CRM customers in Jeddah. The primary rule for installation is 2 business days, while the escalation or completion target for site readiness is 5 business days. Customers must submit the request through the HamsAI portal and. Source: delivery_en_001#0",
+          "source_doc_id": "delivery_en_001",
+          "positive_chunk_id": "delivery_en_001#0",
+          "lang": "en"
+        },
+        {
+          "turn": 3,
+          "user": "كم تبلغ الرسوم أو المهلة المذكورة في delivery_mixed_001؟",
+          "standalone_query": "كم تبلغ الرسوم أو المهلة المذكورة في delivery_mixed_001؟",
+          "expected_answer": "توجد الإجابة في المستند delivery_mixed_001: يوضح هذا المستند المختلط Mixed Policy رقم 1 قواعد التوصيل والتركيب الخاصة بـ نظام HamsAI Core CRM / HamsAI Core CRM. The operational threshold for delivery fee is 25 requests per month (٢٥ طلب)، and the fee for exceeding it is SAR 410. يجب استخدام. المصدر: delivery_mixed_001#0",
+          "source_doc_id": "delivery_mixed_001",
+          "positive_chunk_id": "delivery_mixed_001#0",
+          "lang": "ar"
+        },
+        {
+          "turn": 4,
+          "user": "What fee, date, or deadline is stated in delivery_ar_002?",
+          "standalone_query": "What fee, date, or deadline is stated in delivery_ar_002?",
+          "expected_answer": "The answer is in document delivery_ar_002: ينطبق قسم التوصيل والتركيب رقم 2 على عملاء مكتب HamsAI SmartDesk في الدمام. القاعدة الأساسية الخاصة بـ التركيب هي 4 أيام عمل، بينما تكون مهلة جاهزية الموقع 8 أيام عمل من تاريخ قبول الطلب. يجب على العميل إرسال الطلب من خلال بوابة HamsAI مع رقم. Source: delivery_ar_002#0",
+          "source_doc_id": "delivery_ar_002",
+          "positive_chunk_id": "delivery_ar_002#0",
+          "lang": "en"
+        },
+        {
+          "turn": 5,
+          "user": "كم تبلغ الرسوم أو المهلة المذكورة في delivery_en_002؟",
+          "standalone_query": "كم تبلغ الرسوم أو المهلة المذكورة في delivery_en_002؟",
+          "expected_answer": "توجد الإجابة في المستند delivery_en_002: Delivery and Installation section 2 applies to HamsAI SmartDesk customers in Dammam. The primary rule for installation is 3 business days, while the escalation or completion target for site readiness is 6 business days. Customers must submit the request through the HamsAI portal and include. المصدر: delivery_en_002#0",
+          "source_doc_id": "delivery_en_002",
+          "positive_chunk_id": "delivery_en_002#0",
+          "lang": "ar"
+        }
+      ]
+    },
+    {
+      "conversation_id": "conv_006",
+      "topic": "privacy",
+      "turns": [
+        {
+          "turn": 1,
+          "user": "Summarize the security policy in this document.",
+          "standalone_query": "Summarize the security policy in this document.",
+          "expected_answer": "The answer is in document privacy_ar_001: ينطبق قسم خصوصية البيانات وأمنها رقم 1 على عملاء نظام HamsAI Core CRM في جدة. القاعدة الأساسية الخاصة بـ تشفير AES-256 هي 3 أيام عمل، بينما تكون مهلة بروتوكول TLS 1.3 7 أيام عمل من تاريخ قبول الطلب. يجب على العميل إرسال الطلب من خلال. Source: privacy_ar_001#0",
+          "source_doc_id": "privacy_ar_001",
+          "positive_chunk_id": "privacy_ar_001#0",
+          "lang": "en"
+        },
+        {
+          "turn": 2,
+          "user": "كم تبلغ الرسوم أو المهلة المذكورة في privacy_en_001؟",
+          "standalone_query": "كم تبلغ الرسوم أو المهلة المذكورة في privacy_en_001؟",
+          "expected_answer": "توجد الإجابة في المستند privacy_en_001: Data Privacy and Security section 1 applies to HamsAI Core CRM customers in Jeddah. The primary rule for AES-256 is 2 business days, while the escalation or completion target for TLS 1.3 is 5 business days. Customers must submit the request through the HamsAI portal. المصدر: privacy_en_001#0",
+          "source_doc_id": "privacy_en_001",
+          "positive_chunk_id": "privacy_en_001#0",
+          "lang": "ar"
+        },
+        {
+          "turn": 3,
+          "user": "What is the main rule in خصوصية البيانات وأمنها - Data Privacy and Security 1?",
+          "standalone_query": "What is the main rule in خصوصية البيانات وأمنها - Data Privacy and Security 1?",
+          "expected_answer": "The answer is in document privacy_mixed_001: يوضح هذا المستند المختلط Mixed Policy رقم 1 قواعد خصوصية البيانات وأمنها الخاصة بـ نظام HamsAI Core CRM / HamsAI Core CRM. The operational threshold for RBAC is 25 requests per month (٢٥ طلب)، and the fee for exceeding it is SAR 410. يجب استخدام. Source: privacy_mixed_001#0",
+          "source_doc_id": "privacy_mixed_001",
+          "positive_chunk_id": "privacy_mixed_001#0",
+          "lang": "en"
+        },
+        {
+          "turn": 4,
+          "user": "ما الشرط الذي ينطبق على العميل حسب خصوصية البيانات وأمنها - قسم 2؟",
+          "standalone_query": "ما الشرط الذي ينطبق على العميل حسب خصوصية البيانات وأمنها - قسم 2؟",
+          "expected_answer": "توجد الإجابة في المستند privacy_ar_002: ينطبق قسم خصوصية البيانات وأمنها رقم 2 على عملاء مكتب HamsAI SmartDesk في الدمام. القاعدة الأساسية الخاصة بـ تشفير AES-256 هي 4 أيام عمل، بينما تكون مهلة بروتوكول TLS 1.3 8 أيام عمل من تاريخ قبول الطلب. يجب على العميل إرسال الطلب من خلال بوابة. المصدر: privacy_ar_002#0",
+          "source_doc_id": "privacy_ar_002",
+          "positive_chunk_id": "privacy_ar_002#0",
+          "lang": "ar"
+        },
+        {
+          "turn": 5,
+          "user": "Summarize the security policy in this document.",
+          "standalone_query": "Summarize the security policy in this document.",
+          "expected_answer": "The answer is in document privacy_en_002: Data Privacy and Security section 2 applies to HamsAI SmartDesk customers in Dammam. The primary rule for AES-256 is 3 business days, while the escalation or completion target for TLS 1.3 is 6 business days. Customers must submit the request through the HamsAI portal and. Source: privacy_en_002#0",
+          "source_doc_id": "privacy_en_002",
+          "positive_chunk_id": "privacy_en_002#0",
+          "lang": "en"
+        }
+      ]
+    },
+    {
+      "conversation_id": "conv_007",
+      "topic": "onboarding",
+      "turns": [
+        {
+          "turn": 1,
+          "user": "اشرح سياسة implementation المرتبطة بهذا المستند.",
+          "standalone_query": "اشرح سياسة implementation المرتبطة بهذا المستند.",
+          "expected_answer": "توجد الإجابة في المستند onboarding_ar_001: ينطبق قسم خطة التهيئة والتدريب رقم 1 على عملاء نظام HamsAI Core CRM في جدة. القاعدة الأساسية الخاصة بـ مرحلة الاكتشاف هي 3 أيام عمل، بينما تكون مهلة ترحيل البيانات 7 أيام عمل من تاريخ قبول الطلب. يجب على العميل إرسال الطلب من خلال بوابة. المصدر: onboarding_ar_001#0",
+          "source_doc_id": "onboarding_ar_001",
+          "positive_chunk_id": "onboarding_ar_001#0",
+          "lang": "ar"
+        },
+        {
+          "turn": 2,
+          "user": "Summarize the implementation policy in this document.",
+          "standalone_query": "Summarize the implementation policy in this document.",
+          "expected_answer": "The answer is in document onboarding_en_001: Onboarding and Training Plan section 1 applies to HamsAI Core CRM customers in Jeddah. The primary rule for discovery is 2 business days, while the escalation or completion target for migration is 5 business days. Customers must submit the request through the HamsAI portal and. Source: onboarding_en_001#0",
+          "source_doc_id": "onboarding_en_001",
+          "positive_chunk_id": "onboarding_en_001#0",
+          "lang": "en"
+        },
+        {
+          "turn": 3,
+          "user": "ما الشرط الذي ينطبق على العميل حسب خطة التهيئة والتدريب - Onboarding and Training Plan 1؟",
+          "standalone_query": "ما الشرط الذي ينطبق على العميل حسب خطة التهيئة والتدريب - Onboarding and Training Plan 1؟",
+          "expected_answer": "توجد الإجابة في المستند onboarding_mixed_001: يوضح هذا المستند المختلط Mixed Policy رقم 1 قواعد خطة التهيئة والتدريب الخاصة بـ نظام HamsAI Core CRM / HamsAI Core CRM. The operational threshold for UAT is 25 requests per month (٢٥ طلب)، and the fee for exceeding it is SAR 410. يجب استخدام. المصدر: onboarding_mixed_001#0",
+          "source_doc_id": "onboarding_mixed_001",
+          "positive_chunk_id": "onboarding_mixed_001#0",
+          "lang": "ar"
+        },
+        {
+          "turn": 4,
+          "user": "Which customer condition applies according to خطة التهيئة والتدريب - قسم 2?",
+          "standalone_query": "Which customer condition applies according to خطة التهيئة والتدريب - قسم 2?",
+          "expected_answer": "The answer is in document onboarding_ar_002: ينطبق قسم خطة التهيئة والتدريب رقم 2 على عملاء مكتب HamsAI SmartDesk في الدمام. القاعدة الأساسية الخاصة بـ مرحلة الاكتشاف هي 4 أيام عمل، بينما تكون مهلة ترحيل البيانات 8 أيام عمل من تاريخ قبول الطلب. يجب على العميل إرسال الطلب من خلال بوابة HamsAI. Source: onboarding_ar_002#0",
+          "source_doc_id": "onboarding_ar_002",
+          "positive_chunk_id": "onboarding_ar_002#0",
+          "lang": "en"
+        },
+        {
+          "turn": 5,
+          "user": "ما هي القاعدة الأساسية في مستند Onboarding and Training Plan - Section 2؟",
+          "standalone_query": "ما هي القاعدة الأساسية في مستند Onboarding and Training Plan - Section 2؟",
+          "expected_answer": "توجد الإجابة في المستند onboarding_en_002: Onboarding and Training Plan section 2 applies to HamsAI SmartDesk customers in Dammam. The primary rule for discovery is 3 business days, while the escalation or completion target for migration is 6 business days. Customers must submit the request through the HamsAI portal and include. المصدر: onboarding_en_002#0",
+          "source_doc_id": "onboarding_en_002",
+          "positive_chunk_id": "onboarding_en_002#0",
+          "lang": "ar"
+        }
+      ]
+    },
+    {
+      "conversation_id": "conv_008",
+      "topic": "api",
+      "turns": [
+        {
+          "turn": 1,
+          "user": "What fee, date, or deadline is stated in api_ar_001?",
+          "standalone_query": "What fee, date, or deadline is stated in api_ar_001?",
+          "expected_answer": "The answer is in document api_ar_001: ينطبق قسم دليل واجهات API رقم 1 على عملاء نظام HamsAI Core CRM في جدة. القاعدة الأساسية الخاصة بـ مصادقة OAuth2 هي 3 أيام عمل، بينما تكون مهلة حد الطلبات 7 أيام عمل من تاريخ قبول الطلب. يجب على العميل إرسال الطلب من خلال بوابة. Source: api_ar_001#0",
+          "source_doc_id": "api_ar_001",
+          "positive_chunk_id": "api_ar_001#0",
+          "lang": "en"
+        },
+        {
+          "turn": 2,
+          "user": "كم تبلغ الرسوم أو المهلة المذكورة في api_en_001؟",
+          "standalone_query": "كم تبلغ الرسوم أو المهلة المذكورة في api_en_001؟",
+          "expected_answer": "توجد الإجابة في المستند api_en_001: API Integration Guide section 1 applies to HamsAI Core CRM customers in Jeddah. The primary rule for OAuth2 is 2 business days, while the escalation or completion target for rate limit is 5 business days. Customers must submit the request through the HamsAI portal and. المصدر: api_en_001#0",
+          "source_doc_id": "api_en_001",
+          "positive_chunk_id": "api_en_001#0",
+          "lang": "ar"
+        },
+        {
+          "turn": 3,
+          "user": "Summarize the technical policy in this document.",
+          "standalone_query": "Summarize the technical policy in this document.",
+          "expected_answer": "The answer is in document api_mixed_001: يوضح هذا المستند المختلط Mixed Policy رقم 1 قواعد دليل واجهات API الخاصة بـ نظام HamsAI Core CRM / HamsAI Core CRM. The operational threshold for production key is 25 requests per month (٢٥ طلب)، and the fee for exceeding it is SAR 410. يجب. Source: api_mixed_001#0",
+          "source_doc_id": "api_mixed_001",
+          "positive_chunk_id": "api_mixed_001#0",
+          "lang": "en"
+        },
+        {
+          "turn": 4,
+          "user": "ما هي القاعدة الأساسية في مستند دليل واجهات API - قسم 2؟",
+          "standalone_query": "ما هي القاعدة الأساسية في مستند دليل واجهات API - قسم 2؟",
+          "expected_answer": "توجد الإجابة في المستند api_ar_002: ينطبق قسم دليل واجهات API رقم 2 على عملاء مكتب HamsAI SmartDesk في الدمام. القاعدة الأساسية الخاصة بـ مصادقة OAuth2 هي 4 أيام عمل، بينما تكون مهلة حد الطلبات 8 أيام عمل من تاريخ قبول الطلب. يجب على العميل إرسال الطلب من خلال بوابة HamsAI. المصدر: api_ar_002#0",
+          "source_doc_id": "api_ar_002",
+          "positive_chunk_id": "api_ar_002#0",
+          "lang": "ar"
+        },
+        {
+          "turn": 5,
+          "user": "Which customer condition applies according to API Integration Guide - Section 2?",
+          "standalone_query": "Which customer condition applies according to API Integration Guide - Section 2?",
+          "expected_answer": "The answer is in document api_en_002: API Integration Guide section 2 applies to HamsAI SmartDesk customers in Dammam. The primary rule for OAuth2 is 3 business days, while the escalation or completion target for rate limit is 6 business days. Customers must submit the request through the HamsAI portal and include. Source: api_en_002#0",
+          "source_doc_id": "api_en_002",
+          "positive_chunk_id": "api_en_002#0",
+          "lang": "en"
+        }
+      ]
+    },
+    {
+      "conversation_id": "conv_009",
+      "topic": "infrastructure",
+      "turns": [
+        {
+          "turn": 1,
+          "user": "ما هي القاعدة الأساسية في مستند متطلبات البنية التحتية - قسم 1؟",
+          "standalone_query": "ما هي القاعدة الأساسية في مستند متطلبات البنية التحتية - قسم 1؟",
+          "expected_answer": "توجد الإجابة في المستند infrastructure_ar_001: ينطبق قسم متطلبات البنية التحتية رقم 1 على عملاء نظام HamsAI Core CRM في جدة. القاعدة الأساسية الخاصة بـ أنوية المعالج هي 3 أيام عمل، بينما تكون مهلة الذاكرة 7 أيام عمل من تاريخ قبول الطلب. يجب على العميل إرسال الطلب من خلال بوابة HamsAI. المصدر: infrastructure_ar_001#0",
+          "source_doc_id": "infrastructure_ar_001",
+          "positive_chunk_id": "infrastructure_ar_001#0",
+          "lang": "ar"
+        },
+        {
+          "turn": 2,
+          "user": "Summarize the technical policy in this document.",
+          "standalone_query": "Summarize the technical policy in this document.",
+          "expected_answer": "The answer is in document infrastructure_en_001: Infrastructure Requirements section 1 applies to HamsAI Core CRM customers in Jeddah. The primary rule for CPU cores is 2 business days, while the escalation or completion target for RAM is 5 business days. Customers must submit the request through the HamsAI portal and include. Source: infrastructure_en_001#0",
+          "source_doc_id": "infrastructure_en_001",
+          "positive_chunk_id": "infrastructure_en_001#0",
+          "lang": "en"
+        },
+        {
+          "turn": 3,
+          "user": "اشرح سياسة technical المرتبطة بهذا المستند.",
+          "standalone_query": "اشرح سياسة technical المرتبطة بهذا المستند.",
+          "expected_answer": "توجد الإجابة في المستند infrastructure_mixed_001: يوضح هذا المستند المختلط Mixed Policy رقم 1 قواعد متطلبات البنية التحتية الخاصة بـ نظام HamsAI Core CRM / HamsAI Core CRM. The operational threshold for PostgreSQL is 25 requests per month (٢٥ طلب)، and the fee for exceeding it is SAR 410. يجب استخدام. المصدر: infrastructure_mixed_001#0",
+          "source_doc_id": "infrastructure_mixed_001",
+          "positive_chunk_id": "infrastructure_mixed_001#0",
+          "lang": "ar"
+        },
+        {
+          "turn": 4,
+          "user": "Summarize the technical policy in this document.",
+          "standalone_query": "Summarize the technical policy in this document.",
+          "expected_answer": "The answer is in document infrastructure_ar_002: ينطبق قسم متطلبات البنية التحتية رقم 2 على عملاء مكتب HamsAI SmartDesk في الدمام. القاعدة الأساسية الخاصة بـ أنوية المعالج هي 4 أيام عمل، بينما تكون مهلة الذاكرة 8 أيام عمل من تاريخ قبول الطلب. يجب على العميل إرسال الطلب من خلال بوابة HamsAI مع. Source: infrastructure_ar_002#0",
+          "source_doc_id": "infrastructure_ar_002",
+          "positive_chunk_id": "infrastructure_ar_002#0",
+          "lang": "en"
+        },
+        {
+          "turn": 5,
+          "user": "كم تبلغ الرسوم أو المهلة المذكورة في infrastructure_en_002؟",
+          "standalone_query": "كم تبلغ الرسوم أو المهلة المذكورة في infrastructure_en_002؟",
+          "expected_answer": "توجد الإجابة في المستند infrastructure_en_002: Infrastructure Requirements section 2 applies to HamsAI SmartDesk customers in Dammam. The primary rule for CPU cores is 3 business days, while the escalation or completion target for RAM is 6 business days. Customers must submit the request through the HamsAI portal and include the. المصدر: infrastructure_en_002#0",
+          "source_doc_id": "infrastructure_en_002",
+          "positive_chunk_id": "infrastructure_en_002#0",
+          "lang": "ar"
+        }
+      ]
+    },
+    {
+      "conversation_id": "conv_010",
+      "topic": "billing",
+      "turns": [
+        {
+          "turn": 1,
+          "user": "Summarize the finance policy in this document.",
+          "standalone_query": "Summarize the finance policy in this document.",
+          "expected_answer": "The answer is in document billing_ar_001: ينطبق قسم الفوترة والمدفوعات رقم 1 على عملاء نظام HamsAI Core CRM في جدة. القاعدة الأساسية الخاصة بـ الفاتورة هي 3 أيام عمل، بينما تكون مهلة الدفع خلال 30 يوم 7 أيام عمل من تاريخ قبول الطلب. يجب على العميل إرسال الطلب من خلال بوابة. Source: billing_ar_001#0",
+          "source_doc_id": "billing_ar_001",
+          "positive_chunk_id": "billing_ar_001#0",
+          "lang": "en"
+        },
+        {
+          "turn": 2,
+          "user": "اشرح سياسة finance المرتبطة بهذا المستند.",
+          "standalone_query": "اشرح سياسة finance المرتبطة بهذا المستند.",
+          "expected_answer": "توجد الإجابة في المستند billing_en_001: Billing and Payments section 1 applies to HamsAI Core CRM customers in Jeddah. The primary rule for invoice is 2 business days, while the escalation or completion target for Net 30 is 5 business days. Customers must submit the request through the HamsAI portal and. المصدر: billing_en_001#0",
+          "source_doc_id": "billing_en_001",
+          "positive_chunk_id": "billing_en_001#0",
+          "lang": "ar"
+        },
+        {
+          "turn": 3,
+          "user": "What is the main rule in الفوترة والمدفوعات - Billing and Payments 1?",
+          "standalone_query": "What is the main rule in الفوترة والمدفوعات - Billing and Payments 1?",
+          "expected_answer": "The answer is in document billing_mixed_001: يوضح هذا المستند المختلط Mixed Policy رقم 1 قواعد الفوترة والمدفوعات الخاصة بـ نظام HamsAI Core CRM / HamsAI Core CRM. The operational threshold for late fee is 25 requests per month (٢٥ طلب)، and the fee for exceeding it is SAR 410. يجب استخدام. Source: billing_mixed_001#0",
+          "source_doc_id": "billing_mixed_001",
+          "positive_chunk_id": "billing_mixed_001#0",
+          "lang": "en"
+        },
+        {
+          "turn": 4,
+          "user": "ما الشرط الذي ينطبق على العميل حسب الفوترة والمدفوعات - قسم 2؟",
+          "standalone_query": "ما الشرط الذي ينطبق على العميل حسب الفوترة والمدفوعات - قسم 2؟",
+          "expected_answer": "توجد الإجابة في المستند billing_ar_002: ينطبق قسم الفوترة والمدفوعات رقم 2 على عملاء مكتب HamsAI SmartDesk في الدمام. القاعدة الأساسية الخاصة بـ الفاتورة هي 4 أيام عمل، بينما تكون مهلة الدفع خلال 30 يوم 8 أيام عمل من تاريخ قبول الطلب. يجب على العميل إرسال الطلب من خلال بوابة HamsAI. المصدر: billing_ar_002#0",
+          "source_doc_id": "billing_ar_002",
+          "positive_chunk_id": "billing_ar_002#0",
+          "lang": "ar"
+        },
+        {
+          "turn": 5,
+          "user": "Which customer condition applies according to Billing and Payments - Section 2?",
+          "standalone_query": "Which customer condition applies according to Billing and Payments - Section 2?",
+          "expected_answer": "The answer is in document billing_en_002: Billing and Payments section 2 applies to HamsAI SmartDesk customers in Dammam. The primary rule for invoice is 3 business days, while the escalation or completion target for Net 30 is 6 business days. Customers must submit the request through the HamsAI portal and include. Source: billing_en_002#0",
+          "source_doc_id": "billing_en_002",
+          "positive_chunk_id": "billing_en_002#0",
+          "lang": "en"
+        }
+      ]
+    }
+  ]
+}

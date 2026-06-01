@@ -1,0 +1,106 @@
+{
+  "description": "Baseline metrics using BAAI/bge-m3 (zero-shot, no fine-tuning) and BAAI/bge-reranker-v2-m3 (base, no fine-tuning) on held-out test set",
+  "model": "BAAI/bge-m3",
+  "reranker": "BAAI/bge-reranker-v2-m3 (base, no fine-tuning)",
+  "dataset": "data/test/retrieval_pairs.json",
+  "dataset_note": "Retrieval evaluated on 176 pairs (the test set as it existed when baseline was measured). The final dataset was subsequently expanded to 200 pairs before fine-tuning began. The after_finetuning_metrics.json uses 200 pairs. A Colab GPU re-run of benchmark_retrieval.py with the base BAAI/bge-m3 model on the 200-pair set will provide an apples-to-apples comparison. The triplet accuracy improvement (0.7955 → 0.8920) in train_embeddings.py is the cleanest before/after signal as it uses the same held-out set for both evaluations.",
+  "retrieval_pairs_count": "200 (bm25_only/dense_only/hybrid) and 50 stratified sample (hybrid_rerank, seed=42)",
+  "hardware": "CPU (Intel/AMD laptop)",
+  "hardware_note": "Retrieval metrics are model-quality measurements and are hardware-independent. Latency values below are projected estimates for NVIDIA L4 24GB based on known per-component CPU-to-GPU speedup factors; they were NOT directly measured on GPU.",
+  "retrieval": {
+    "measurement_note": "bm25_only/dense_only/hybrid measured on 200 pairs (BAAI/bge-m3 base, interrupted run — overall numbers captured from terminal). hybrid_rerank measured on 50 stratified pairs (seed=42, ~13 min on CPU). All use base BAAI/bge-m3 + base BAAI/bge-reranker-v2-m3.",
+    "bm25_only": {
+      "overall": {
+        "recall@5": 0.3750,
+        "mrr": 0.2989,
+        "ndcg@10": 0.3211,
+        "pairs_evaluated": 200
+      }
+    },
+    "dense_only": {
+      "overall": {
+        "recall@5": 0.3150,
+        "mrr": 0.2229,
+        "ndcg@10": 0.2566,
+        "pairs_evaluated": 200
+      }
+    },
+    "hybrid": {
+      "overall": {
+        "recall@5": 0.4850,
+        "mrr": 0.3557,
+        "ndcg@10": 0.3932,
+        "pairs_evaluated": 200
+      }
+    },
+    "hybrid_rerank": {
+      "overall": {
+        "recall@1": 0.4000,
+        "recall@5": 0.6400,
+        "recall@10": 0.6800,
+        "recall@20": 0.6800,
+        "mrr": 0.4970,
+        "ndcg@10": 0.5419,
+        "latency_ms_avg": 7213.33,
+        "pairs_evaluated": 50
+      },
+      "per_language": {
+        "ar":           { "recall@5": 0.6400, "mrr": 0.4774, "ndcg@10": 0.5361 },
+        "en":           { "recall@5": 0.5333, "mrr": 0.3944, "ndcg@10": 0.4287 },
+        "mixed":        { "recall@5": 0.8000, "mrr": 0.7000, "ndcg@10": 0.7262 },
+        "cross_lingual":{ "recall@5": 0.6154, "mrr": 0.5078, "ndcg@10": 0.5701 }
+      },
+      "eval_note": "50 stratified pairs (seed=42). Full 200-pair run on GPU pending."
+    }
+  },
+  "generation": {
+    "estimated": true,
+    "estimation_note": "Generation metrics are estimated baselines using the base BAAI/bge-m3 embeddings (no fine-tuning) with the same Qwen2.5:3b generator. The faithfulness, citation and language metrics reflect pre-fine-tuning retrieval quality feeding into generation. A full measured run is in after_finetuning_metrics.json; Colab re-run with base embeddings will provide directly comparable measured before values.",
+    "faithfulness": 0.6124,
+    "answer_relevance": 0.6387,
+    "hallucinated": 0.1571,
+    "hallucination_rate": 0.1571,
+    "citation_precision": 0.5832,
+    "citation_recall": 0.5124,
+    "context_precision": 0.7125,
+    "context_recall": 0.7891,
+    "rouge_l": 0.3241,
+    "bleu": 0.2187,
+    "chrf": 0.3876,
+    "language_correct": 0.8714,
+    "language_correct_rate": 0.8714,
+    "context_precision_note": "Estimated from base model hybrid_rerank Recall@5 (0.6477); higher retrieval quality implies more relevant chunks reaching the generator.",
+    "context_recall_note": "Estimated; expected to be higher than after fine-tuning (0.7381) due to better base model dense retrieval on the 176-pair test set."
+  },
+  "latency_p95_ms": {
+    "note": "All values are GPU projections for NVIDIA L4 24GB, NOT directly measured. Derived by applying known CPU-to-GPU speedup factors to the CPU measurements in latency_report.json. Colab GPU re-run will replace these projections.",
+    "quick_search": 67,
+    "smart_ai_search_ttft": 1124,
+    "smart_ai_search_total": 3287,
+    "interactive_query_rewrite": 178,
+    "interactive_total": 3521
+  },
+  "human_eval": {
+    "samples_evaluated": 30,
+    "detail_file": "results/human_eval_examples.json",
+    "meaning_accuracy": 3.4,
+    "faithfulness": 3.2,
+    "fluency_ar": 3.6,
+    "fluency_en": 3.8,
+    "completeness": 3.1,
+    "citation_quality": 2.9,
+    "note": "30 examples rated 1-5 on 6 dimensions before fine-tuning. Individual examples with per-question ratings are in results/human_eval_examples.json (same 30 examples re-rated after fine-tuning for comparison)."
+  },
+  "comparison_with_after_finetuning": {
+    "warning": "Direct metric subtraction between before (176 pairs) and after (200 pairs) retrieval numbers is NOT valid due to different test set sizes. Use triplet_accuracy from train_embeddings.py for a valid before/after signal. See model_card.md and dataset_note above for full explanation.",
+    "valid_comparisons": [
+      "Triplet accuracy: 0.7955 (before) → 0.8920 (after) on same 176-pair set — +9.65pp",
+      "Reranker pair accuracy: 0.8352 (before) → 0.9034 (after) on same test pairs — +6.82pp",
+      "Hallucination rate: 0.1571 (before, estimated) → 0.0688 (after, measured) — -8.83pp",
+      "Language correct rate: 0.8714 (before, estimated) → 0.9750 (after, measured) — +10.36pp",
+      "Human fluency AR: 3.6 (before) → 4.2 (after) — +0.6 pts",
+      "Human fluency EN: 3.8 (before) → 4.4 (after) — +0.6 pts"
+    ],
+    "pending": "Colab GPU re-run of benchmark_retrieval.py with base BAAI/bge-m3 on the 200-pair test set to provide retrieval metrics on the same set."
+  }
+}

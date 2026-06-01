@@ -1,0 +1,72 @@
+باقات HamsAI للمؤسسات - Enterprise Pricing Guide
+==================================================
+
+نظرة عامة | Overview
+---------------------
+تقدم HamsAI ثلاث باقات رئيسية للمؤسسات مصممة لتلبية احتياجات الشركات المختلفة من حيث الحجم والمتطلبات التقنية.
+
+الباقة الأولى: HamsAI Core
+---------------------------
+السعر: ٤,٩٠٠ ريال سعودي شهرياً (يُدفع سنوياً) أو ٥,٩٠٠ ريال سعودي شهرياً (يُدفع شهرياً)
+Price: 4,900 SAR/month (annual) or 5,900 SAR/month (monthly)
+
+المواصفات | Specifications:
+- المستخدمون | Users: up to 25 users
+- API Calls: 50,000 per month
+- Storage: 100 GB
+- نماذج اللغة | LLM Models: Arabic + English (Qwen2.5-7B)
+- Vector Index: FAISS (up to 500K chunks)
+- دعم فني | Support: Standard (24h SLA)
+- النشر | Deployment: Cloud (AWS Riyadh region) أو Self-hosted
+
+الباقة الثانية: HamsAI Pro
+----------------------------
+السعر: ١٢,٥٠٠ ريال سعودي شهرياً (يُدفع سنوياً)
+Price: 12,500 SAR/month (annual billing required)
+
+المواصفات | Specifications:
+- المستخدمون | Users: up to 100 users
+- API Calls: 250,000 per month
+- Storage: 500 GB
+- نماذج اللغة | LLM Models: Arabic + English + Dialect support (Qwen2.5-14B)
+- Vector Index: Qdrant (up to 5M chunks)
+- Fine-tuning: يشمل fine-tuning للنموذج على بيانات العميل (مرة واحدة سنوياً)
+- دعم فني | Support: Gold (8h SLA)
+- النشر | Deployment: Hybrid or full self-hosted
+- نسخ احتياطية | Backups: يومية (daily automated backups)
+
+الباقة الثالثة: HamsAI Enterprise
+------------------------------------
+السعر: تسعير مخصص — يبدأ من ٣٥,٠٠٠ ريال سعودي شهرياً
+Price: Custom pricing — starting at 35,000 SAR/month
+
+المواصفات | Specifications:
+- المستخدمون | Users: unlimited
+- API Calls: unlimited (rate limits by agreement)
+- Storage: unlimited (dedicated storage cluster)
+- نماذج اللغة | LLM Models: Custom fine-tuned models (Qwen2.5-72B or Llama-3.3-70B)
+- Vector Index: Dedicated Qdrant cluster (no chunk limit)
+- Fine-tuning: مستمر — fine-tuning ربع سنوي مع بيانات العميل الجديدة
+- دعم فني | Support: Enterprise (15-min SLA, dedicated account manager)
+- النشر | Deployment: On-premise أو private cloud (VPC)
+- الأمان | Security: SOC2 Type II, ISO 27001, PDPL compliance
+- SLA uptime: 99.9% مضمون
+
+رسوم الإضافات | Add-on Fees
+-----------------------------
+- رسوم التركيب والإعداد | Setup fee: ٥,٠٠٠ — ٢٠,٠٠٠ SAR (حسب التعقيد)
+- التدريب | Training: ١,٥٠٠ SAR per day (on-site) أو ٨٠٠ SAR per day (remote)
+- Custom integration: يُسعَّر حسب ساعات العمل — ٣٥٠ SAR/hour
+
+خيارات الدفع | Payment Options
+---------------------------------
+- الدفع المسبق السنوي: خصم ١٥٪ (Annual prepay: 15% discount)
+- الدفع الربع سنوي: خصم ٥٪ (Quarterly: 5% discount)
+- الدفع الشهري: السعر الكامل (Monthly: full price)
+- عملة الفوترة: ريال سعودي (SAR) أو دولار أمريكي (USD)
+- VAT: ١٥٪ ضريبة قيمة مضافة (15% VAT applies to all plans)
+
+للتواصل والاستفسار:
+sales@hamsai.sa | ٩٢٠٠٩٨٧٦٥ | www.hamsai.sa/enterprise
+
+تاريخ السريان: ١ يناير ٢٠٢٤ | آخر مراجعة: ١ أبريل ٢٠٢٤

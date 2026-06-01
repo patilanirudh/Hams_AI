@@ -1,0 +1,11 @@
+{
+  "seed": 42,
+  "documents": 1020,
+  "chunks": 1020,
+  "train_pairs": 700,
+  "val_pairs": 120,
+  "retrieval_test_pairs": 200,
+  "qa_pairs": 160,
+  "conversations": 10,
+  "license": "Synthetic dataset for assessment use; document as CC-BY-4.0 in README if submitted."
+}

@@ -1,0 +1,59 @@
+# Fine-tuning configuration for BGE-M3 embedding model
+
+model:
+  base_model: "BAAI/bge-m3"
+  huggingface_link: "https://huggingface.co/BAAI/bge-m3"
+  output_path: "./models/bge-m3-hamsai-finetuned"
+  max_seq_length: 512
+
+training:
+  method: "finetuning"
+  loss: "TripletLoss"
+  epochs: 3
+  batch_size: 8
+  learning_rate: 2.0e-5
+  warmup_steps: 10
+  weight_decay: 0.01
+  evaluation_steps: 50
+  save_best_model: true
+  fp16: true
+
+data:
+  train_file: "./data/train/train_split.json"
+  validation_file: "./data/train/val_split.json"
+  test_file: "./data/test/retrieval_pairs.json"
+  train_split: 0.8
+  val_split: 0.1
+  test_split: 0.1
+
+hard_negatives:
+  enabled: true
+  strategy: "in_batch_and_explicit"
+  num_hard_negatives: 1
+
+arabic_normalization:
+  remove_diacritics: true
+  normalize_alef: true
+  normalize_ya: true
+  normalize_tamarbuta: true
+  remove_tatweel: true
+  normalize_numerals: true
+
+english_normalization:
+  lowercase: true
+  remove_punctuation: false
+  stemming: false
+  lemmatization: true
+
+augmentation:
+  back_translation: false
+  paraphrasing: false
+  query_reformulation: true
+
+reranker:
+  base_model: "BAAI/bge-reranker-v2-m3"
+  huggingface_link: "https://huggingface.co/BAAI/bge-reranker-v2-m3"
+  output_path: "./models/bge-reranker-hamsai-finetuned"
+  epochs: 2
+  batch_size: 4
+  learning_rate: 1.0e-5

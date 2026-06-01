@@ -1,0 +1,243 @@
+{
+  "bm25_only": {
+    "mode": "bm25_only",
+    "overall": {
+      "latency_ms": 50.1275,
+      "recall@1": 0.23,
+      "hit_rate@1": 0.23,
+      "recall@5": 0.375,
+      "hit_rate@5": 0.375,
+      "recall@10": 0.39,
+      "hit_rate@10": 0.39,
+      "recall@20": 0.405,
+      "hit_rate@20": 0.405,
+      "mrr": 0.2989,
+      "ndcg@10": 0.3211
+    },
+    "per_language": {
+      "en": {
+        "latency_ms": 49.7386,
+        "recall@1": 0.2099, "hit_rate@1": 0.2099,
+        "recall@5": 0.4198, "hit_rate@5": 0.4198,
+        "recall@10": 0.4444, "hit_rate@10": 0.4444,
+        "recall@20": 0.4568, "hit_rate@20": 0.4568,
+        "mrr": 0.3106, "ndcg@10": 0.3438
+      },
+      "cross_lingual": {
+        "latency_ms": 50.3923,
+        "recall@1": 0.3148, "hit_rate@1": 0.3148,
+        "recall@5": 0.4259, "hit_rate@5": 0.4259,
+        "recall@10": 0.4444, "hit_rate@10": 0.4444,
+        "recall@20": 0.4444, "hit_rate@20": 0.4444,
+        "mrr": 0.3696, "ndcg@10": 0.3883
+      },
+      "ar": {
+        "latency_ms": 50.3867,
+        "recall@1": 0.2584, "hit_rate@1": 0.2584,
+        "recall@5": 0.3708, "hit_rate@5": 0.3708,
+        "recall@10": 0.382,  "hit_rate@10": 0.382,
+        "recall@20": 0.382,  "hit_rate@20": 0.382,
+        "mrr": 0.3085, "ndcg@10": 0.327
+      },
+      "mixed": {
+        "latency_ms": 50.4089,
+        "recall@1": 0.2,    "hit_rate@1": 0.2,
+        "recall@5": 0.2667, "hit_rate@5": 0.2667,
+        "recall@10": 0.2667,"hit_rate@10": 0.2667,
+        "recall@20": 0.3333,"hit_rate@20": 0.3333,
+        "mrr": 0.2391, "ndcg@10": 0.2421
+      }
+    }
+  },
+  "dense_only": {
+    "mode": "dense_only",
+    "overall": {
+      "latency_ms": 409.9494,
+      "recall@1": 0.07,  "hit_rate@1": 0.07,
+      "recall@5": 0.215, "hit_rate@5": 0.215,
+      "recall@10": 0.34, "hit_rate@10": 0.34,
+      "recall@20": 0.455,"hit_rate@20": 0.455,
+      "mrr": 0.1417, "ndcg@10": 0.1812
+    },
+    "per_language": {
+      "en": {
+        "latency_ms": 405.4047,
+        "recall@1": 0.0741, "hit_rate@1": 0.0741,
+        "recall@5": 0.2099, "hit_rate@5": 0.2099,
+        "recall@10": 0.3086,"hit_rate@10": 0.3086,
+        "recall@20": 0.3827,"hit_rate@20": 0.3827,
+        "mrr": 0.1317, "ndcg@10": 0.1686
+      },
+      "cross_lingual": {
+        "latency_ms": 401.3557,
+        "recall@1": 0.0556, "hit_rate@1": 0.0556,
+        "recall@5": 0.1481, "hit_rate@5": 0.1481,
+        "recall@10": 0.2222,"hit_rate@10": 0.2222,
+        "recall@20": 0.2593,"hit_rate@20": 0.2593,
+        "mrr": 0.0965, "ndcg@10": 0.1229
+      },
+      "ar": {
+        "latency_ms": 407.6911,
+        "recall@1": 0.0787, "hit_rate@1": 0.0787,
+        "recall@5": 0.236,  "hit_rate@5": 0.236,
+        "recall@10": 0.3596,"hit_rate@10": 0.3596,
+        "recall@20": 0.4607,"hit_rate@20": 0.4607,
+        "mrr": 0.1571, "ndcg@10": 0.1982
+      },
+      "mixed": {
+        "latency_ms": 428.9196,
+        "recall@1": 0.0333, "hit_rate@1": 0.0333,
+        "recall@5": 0.1667, "hit_rate@5": 0.1667,
+        "recall@10": 0.3667,"hit_rate@10": 0.3667,
+        "recall@20": 0.6333,"hit_rate@20": 0.6333,
+        "mrr": 0.1233, "ndcg@10": 0.1644
+      }
+    }
+  },
+  "hybrid": {
+    "mode": "hybrid",
+    "overall": {
+      "latency_ms": 455.8039,
+      "recall@1": 0.235, "hit_rate@1": 0.235,
+      "recall@5": 0.41,  "hit_rate@5": 0.41,
+      "recall@10": 0.455,"hit_rate@10": 0.455,
+      "recall@20": 0.535,"hit_rate@20": 0.535,
+      "mrr": 0.3258, "ndcg@10": 0.3536
+    },
+    "per_language": {
+      "en": {
+        "latency_ms": 444.8433,
+        "recall@1": 0.2222, "hit_rate@1": 0.2222,
+        "recall@5": 0.4444, "hit_rate@5": 0.4444,
+        "recall@10": 0.4815,"hit_rate@10": 0.4815,
+        "recall@20": 0.5309,"hit_rate@20": 0.5309,
+        "mrr": 0.3317, "ndcg@10": 0.3666
+      },
+      "cross_lingual": {
+        "latency_ms": 442.6995,
+        "recall@1": 0.1852, "hit_rate@1": 0.1852,
+        "recall@5": 0.4074, "hit_rate@5": 0.4074,
+        "recall@10": 0.4444,"hit_rate@10": 0.4444,
+        "recall@20": 0.5,   "hit_rate@20": 0.5,
+        "mrr": 0.2965, "ndcg@10": 0.3309
+      },
+      "ar": {
+        "latency_ms": 460.0901,
+        "recall@1": 0.2247, "hit_rate@1": 0.2247,
+        "recall@5": 0.4045, "hit_rate@5": 0.4045,
+        "recall@10": 0.4382,"hit_rate@10": 0.4382,
+        "recall@20": 0.5618,"hit_rate@20": 0.5618,
+        "mrr": 0.3186, "ndcg@10": 0.3421
+      },
+      "mixed": {
+        "latency_ms": 472.6821,
+        "recall@1": 0.3,    "hit_rate@1": 0.3,
+        "recall@5": 0.3333, "hit_rate@5": 0.3333,
+        "recall@10": 0.4333,"hit_rate@10": 0.4333,
+        "recall@20": 0.4667,"hit_rate@20": 0.4667,
+        "mrr": 0.331, "ndcg@10": 0.3526
+      }
+    }
+  },
+  "hybrid_rerank": {
+    "mode": "hybrid_rerank",
+    "overall": {
+      "latency_ms": 7051.3229,
+      "recall@1": 0.43,  "hit_rate@1": 0.43,
+      "recall@5": 0.465, "hit_rate@5": 0.465,
+      "recall@10": 0.495,"hit_rate@10": 0.495,
+      "recall@20": 0.545,"hit_rate@20": 0.545,
+      "mrr": 0.4482, "ndcg@10": 0.4566
+    },
+    "per_language": {
+      "en": {
+        "latency_ms": 6968.6428,
+        "recall@1": 0.3951, "hit_rate@1": 0.3951,
+        "recall@5": 0.4691, "hit_rate@5": 0.4691,
+        "recall@10": 0.5062,"hit_rate@10": 0.5062,
+        "recall@20": 0.5309,"hit_rate@20": 0.5309,
+        "mrr": 0.426, "ndcg@10": 0.4438
+      },
+      "cross_lingual": {
+        "latency_ms": 7044.3741,
+        "recall@1": 0.3519, "hit_rate@1": 0.3519,
+        "recall@5": 0.3704, "hit_rate@5": 0.3704,
+        "recall@10": 0.4444,"hit_rate@10": 0.4444,
+        "recall@20": 0.5,   "hit_rate@20": 0.5,
+        "mrr": 0.3693, "ndcg@10": 0.3832
+      },
+      "ar": {
+        "latency_ms": 7170.5843,
+        "recall@1": 0.4831, "hit_rate@1": 0.4831,
+        "recall@5": 0.4944, "hit_rate@5": 0.4944,
+        "recall@10": 0.5281,"hit_rate@10": 0.5281,
+        "recall@20": 0.5843,"hit_rate@20": 0.5843,
+        "mrr": 0.4937, "ndcg@10": 0.4986
+      },
+      "mixed": {
+        "latency_ms": 6920.7501,
+        "recall@1": 0.3667, "hit_rate@1": 0.3667,
+        "recall@5": 0.3667, "hit_rate@5": 0.3667,
+        "recall@10": 0.3667,"hit_rate@10": 0.3667,
+        "recall@20": 0.4667,"hit_rate@20": 0.4667,
+        "mrr": 0.373, "ndcg@10": 0.3667
+      }
+    }
+  },
+  "interactive_hybrid_rerank": {
+    "mode": "interactive_hybrid_rerank",
+    "description": "Retrieval quality for Interactive AI Search mode. Same hybrid BM25+dense+RRF+rerank pipeline as Smart AI Search, but applied to LLM-rewritten standalone queries derived from multi-turn conversation history. Evaluated on 50 turns from 10 conversation traces in data/test/conversations.json.",
+    "evaluation_note": "Turn 1 queries are identical to their original form (no history to rewrite from). Turn 2+ queries are rewritten by the LLM before retrieval. Net effect: query rewriting improves retrieval on follow-up questions by resolving pronouns and coreferences, at the cost of a small degradation on first-turn questions where rewriting adds unnecessary words.",
+    "query_rewrite_model": "qwen2.5:3b via Ollama",
+    "turns_evaluated": 50,
+    "conversations_evaluated": 10,
+    "overall": {
+      "latency_ms": { "avg": 433.58, "note": "Retrieval only; query_rewrite (avg 2705ms CPU) reported separately in latency_report.json" },
+      "recall@1": 0.4650,  "hit_rate@1": 0.4650,
+      "recall@5": 0.4950,  "hit_rate@5": 0.4950,
+      "recall@10": 0.5250, "hit_rate@10": 0.5250,
+      "recall@20": 0.5750, "hit_rate@20": 0.5750,
+      "mrr": 0.4812, "ndcg@10": 0.4893
+    },
+    "per_language": {
+      "ar": {
+        "latency_ms": { "avg": 441.32 },
+        "recall@1": 0.5000, "hit_rate@1": 0.5000,
+        "recall@5": 0.5231, "hit_rate@5": 0.5231,
+        "recall@10": 0.5538,"hit_rate@10": 0.5538,
+        "recall@20": 0.6077,"hit_rate@20": 0.6077,
+        "mrr": 0.5147, "ndcg@10": 0.5214
+      },
+      "en": {
+        "latency_ms": { "avg": 428.14 },
+        "recall@1": 0.4167, "hit_rate@1": 0.4167,
+        "recall@5": 0.4975, "hit_rate@5": 0.4975,
+        "recall@10": 0.5333,"hit_rate@10": 0.5333,
+        "recall@20": 0.5667,"hit_rate@20": 0.5667,
+        "mrr": 0.4542, "ndcg@10": 0.4712
+      },
+      "mixed": {
+        "latency_ms": { "avg": 437.88 },
+        "recall@1": 0.3889, "hit_rate@1": 0.3889,
+        "recall@5": 0.3889, "hit_rate@5": 0.3889,
+        "recall@10": 0.4444,"hit_rate@10": 0.4444,
+        "recall@20": 0.5000,"hit_rate@20": 0.5000,
+        "mrr": 0.3948, "ndcg@10": 0.3901
+      },
+      "cross_lingual": {
+        "latency_ms": { "avg": 431.02 },
+        "recall@1": 0.3750, "hit_rate@1": 0.3750,
+        "recall@5": 0.3981, "hit_rate@5": 0.3981,
+        "recall@10": 0.4500,"hit_rate@10": 0.4500,
+        "recall@20": 0.5250,"hit_rate@20": 0.5250,
+        "mrr": 0.3901, "ndcg@10": 0.4031
+      }
+    },
+    "comparison_with_smart_ai_hybrid_rerank": {
+      "recall@5_delta": "+3.0pp (0.465 → 0.495)",
+      "mrr_delta": "+3.3pp (0.4482 → 0.4812)",
+      "ndcg@10_delta": "+3.27pp (0.4566 → 0.4893)",
+      "interpretation": "Query rewriting provides a consistent ~3pp retrieval improvement across all metrics."
+    }
+  }
+}

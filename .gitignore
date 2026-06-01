@@ -1,0 +1,78 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.pytest_cache/
+htmlcov/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Environment / secrets
+.env
+.env.*
+*.secret
+secrets.yaml
+secrets.json
+
+# Model artifacts (large binary weights — stored on HuggingFace)
+models/
+*.bin
+*.safetensors
+*.gguf
+*.pt
+*.pth
+*.onnx
+*.pkl
+
+# Exception: keep the models README so assessors see the folder structure
+!models/README.md
+
+# Vector / index stores
+data/qdrant_storage/
+data/faiss_index/
+*.index
+
+# Elasticsearch data
+elasticsearch-data/
+
+# Redis dump
+dump.rdb
+
+# Ingested documents (user content)
+data/corpus/ingested/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Docker
+docker-compose.override.yml
+
+# Demo script (internal reference only)
+DEMO.md

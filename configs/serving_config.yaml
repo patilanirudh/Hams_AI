@@ -1,0 +1,96 @@
+# Serving configuration for all three search modes
+
+api:
+  host: "0.0.0.0"
+  port: 8000
+  workers: 1
+  reload: false
+  log_level: "info"
+
+# Quick Search mode
+quick_search:
+  engine: "elasticsearch"
+  url: "http://localhost:9200"
+  index_name: "hamsai_knowledge_bank"
+  top_k: 10
+  min_score: 0.1
+  arabic_normalization: true
+  target_latency_ms: 100
+
+# Smart AI Search mode
+smart_ai_search:
+  retrieval:
+    mode: "hybrid"
+    dense_top_k: 20
+    bm25_top_k: 20
+    rrf_k: 60
+    final_top_k: 3
+  reranker:
+    enabled: true
+    model_path: "./models/bge-reranker-hamsai-finetuned"
+    fallback_model: "BAAI/bge-reranker-v2-m3"
+    allow_base_model_fallback: true
+    top_k: 3
+  generator:
+    model: "qwen2.5:3b"
+    url: "http://localhost:11434"
+    max_tokens: 300
+    temperature: 0.1
+    stream: true
+  target_ttft_ms: 1500
+  target_total_ms: 4000
+
+# Interactive AI Search mode
+interactive_search:
+  session:
+    backend: "redis"
+    url: "redis://localhost:6379"
+    ttl_seconds: 3600
+    max_turns: 20
+  query_rewrite:
+    enabled: true
+    model: "qwen2.5:3b"
+    max_tokens: 128
+    target_latency_ms: 200
+  suggested_followups:
+    enabled: true
+    count: 3
+  same_as_smart_ai: true
+
+# Embedding model
+embedding:
+  model_path: "./models/bge-m3-hamsai-finetuned"
+  fallback_model: "BAAI/bge-m3"
+  allow_base_model_fallback: true
+  device: "cpu"
+  batch_size: 32
+  max_seq_length: 512
+  normalize_embeddings: true
+
+# Vector store
+qdrant:
+  url: "http://localhost:6333"
+  collection_name: "hamsai_chunks"
+  vector_size: 1024
+  distance: "Cosine"
+  on_disk: false
+
+# Document chunking
+chunking:
+  chunk_size: 400
+  chunk_overlap: 50
+  min_chunk_size: 100
+  split_by: "sentence"
+
+# Language detection
+language:
+  detect_automatically: true
+  supported: ["ar", "en", "mixed"]
+  respond_in_query_language: true
+
+# Hardware
+hardware:
+  gpu: "NVIDIA RTX 3050 4GB"
+  target_gpu: "NVIDIA L4 24GB"
+  quantization: "Q4_K_M"
+  device_map: "auto"

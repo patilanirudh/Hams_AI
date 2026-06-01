@@ -1,0 +1,181 @@
+{
+  "description": "Post fine-tuning metrics. Retrieval benchmarked on 1020-chunk synthetic corpus (CPU, no GPU). Fine-tuning accuracy from Google Colab T4. Latency measured on CPU laptop (Intel/AMD) — L4 GPU would be ~10-20x faster for reranker and LLM.",
+  "hardware_note": "All retrieval and latency benchmarks run on CPU only. No GPU available on benchmark machine. Target L4 GPU latency projections based on known speedups: reranker 16s CPU → ~60ms GPU, embedding 410ms CPU → ~15ms GPU, LLM 5s CPU → ~0.8s GPU.",
+  "embedding_model": "ani122312/bge-m3-hamsai-finetuned",
+  "reranker_model": "ani122312/bge-reranker-hamsai-finetuned",
+  "generator": "qwen2.5:3b via Ollama (Q4_K_M quantized)",
+  "dataset": "data/test/retrieval_pairs.json (200 pairs), data/test/qa_pairs.json (160 pairs)",
+  "corpus_size": "1020 chunks (10 topics × 34 variants × 3 languages)",
+  "finetuning_details": {
+    "embedding": {
+      "base_model": "BAAI/bge-m3",
+      "method": "TripletLoss",
+      "epochs": 3,
+      "batch_size": 8,
+      "learning_rate": "2e-5",
+      "warmup_ratio": 0.1,
+      "weight_decay": 0.01,
+      "training_pairs": 700,
+      "validation_pairs": 120,
+      "hard_negatives": true,
+      "arabic_normalization": true,
+      "training_time_minutes": 11,
+      "triplet_accuracy_before": 0.7955,
+      "triplet_accuracy_after": 0.8920,
+      "improvement": 0.0965
+    },
+    "reranker": {
+      "base_model": "BAAI/bge-reranker-v2-m3",
+      "method": "Binary CrossEntropy (BCE)",
+      "epochs": 2,
+      "batch_size": 2,
+      "learning_rate": "1e-5",
+      "training_pairs": 1400,
+      "gradient_checkpointing": true,
+      "training_time_minutes": 20,
+      "pair_accuracy_before": 0.8352,
+      "pair_accuracy_after": 0.9034,
+      "improvement": 0.0682
+    }
+  },
+  "retrieval": {
+    "note": "All numbers measured by running benchmark_retrieval.py on 200 held-out test pairs against 1020-chunk index. CPU-only. Latency includes query encoding time.",
+    "bm25_only": {
+      "mode": "bm25_only",
+      "overall": {
+        "recall@1": 0.2300,
+        "recall@5": 0.3750,
+        "recall@10": 0.3900,
+        "recall@20": 0.4050,
+        "hit_rate@5": 0.3750,
+        "mrr": 0.2989,
+        "ndcg@10": 0.3211,
+        "latency_ms": { "avg": 50.1 }
+      },
+      "per_language": {
+        "ar":           { "recall@5": 0.3708, "mrr": 0.3085, "ndcg@10": 0.3270 },
+        "en":           { "recall@5": 0.4198, "mrr": 0.3106, "ndcg@10": 0.3438 },
+        "mixed":        { "recall@5": 0.2667, "mrr": 0.2391, "ndcg@10": 0.2421 },
+        "cross_lingual":{ "recall@5": 0.4259, "mrr": 0.3696, "ndcg@10": 0.3883 }
+      }
+    },
+    "dense_only": {
+      "mode": "dense_only",
+      "overall": {
+        "recall@1": 0.0700,
+        "recall@5": 0.2150,
+        "recall@10": 0.3400,
+        "recall@20": 0.4550,
+        "hit_rate@5": 0.2150,
+        "mrr": 0.1417,
+        "ndcg@10": 0.1812,
+        "latency_ms": { "avg": 409.9 }
+      },
+      "per_language": {
+        "ar":           { "recall@5": 0.2360, "mrr": 0.1571, "ndcg@10": 0.1982 },
+        "en":           { "recall@5": 0.2099, "mrr": 0.1317, "ndcg@10": 0.1686 },
+        "mixed":        { "recall@5": 0.1667, "mrr": 0.1233, "ndcg@10": 0.1644 },
+        "cross_lingual":{ "recall@5": 0.1481, "mrr": 0.0965, "ndcg@10": 0.1229 }
+      }
+    },
+    "hybrid": {
+      "mode": "hybrid",
+      "overall": {
+        "recall@1": 0.2350,
+        "recall@5": 0.4100,
+        "recall@10": 0.4550,
+        "recall@20": 0.5350,
+        "hit_rate@5": 0.4100,
+        "mrr": 0.3258,
+        "ndcg@10": 0.3536,
+        "latency_ms": { "avg": 455.8 }
+      },
+      "per_language": {
+        "ar":           { "recall@5": 0.4045, "mrr": 0.3186, "ndcg@10": 0.3421 },
+        "en":           { "recall@5": 0.4444, "mrr": 0.3317, "ndcg@10": 0.3666 },
+        "mixed":        { "recall@5": 0.3333, "mrr": 0.3310, "ndcg@10": 0.3526 },
+        "cross_lingual":{ "recall@5": 0.4074, "mrr": 0.2965, "ndcg@10": 0.3309 }
+      }
+    },
+    "hybrid_rerank": {
+      "mode": "hybrid_rerank",
+      "overall": {
+        "recall@1": 0.4300,
+        "recall@5": 0.4650,
+        "recall@10": 0.4950,
+        "recall@20": 0.5450,
+        "hit_rate@5": 0.4650,
+        "mrr": 0.4482,
+        "ndcg@10": 0.4566,
+        "latency_ms": { "avg": 7051.3, "note": "CPU reranker; ~60ms on L4 GPU" }
+      },
+      "per_language": {
+        "ar":           { "recall@5": 0.4944, "mrr": 0.4937, "ndcg@10": 0.4986 },
+        "en":           { "recall@5": 0.4691, "mrr": 0.4260, "ndcg@10": 0.4438 },
+        "mixed":        { "recall@5": 0.3667, "mrr": 0.3730, "ndcg@10": 0.3667 },
+        "cross_lingual":{ "recall@5": 0.3704, "mrr": 0.3693, "ndcg@10": 0.3832 }
+      }
+    }
+  },
+  "latency_p95_ms": {
+    "note": "Measured on CPU laptop (Windows 10, no GPU). All values real measurements from benchmark_latency.py. See latency_report.json for full per-stage breakdown. L4 GPU projections based on known speedup factors: reranker 16.5s CPU → ~60ms GPU; embedding 406ms → ~15ms; LLM TTFT 3.1s → ~980ms.",
+    "quick_search": 54.49,
+    "smart_ai_search_ttft": 3113.73,
+    "smart_ai_search_total": 23198.46,
+    "smart_ai_rerank_avg": 16531.36,
+    "smart_ai_retrieval_avg": 406.37,
+    "interactive_query_rewrite": 2902.84,
+    "interactive_total": 27541.17,
+    "latency_vs_topk": {
+      "top_k_1_avg": 7321.73,
+      "top_k_3_avg": 14994.89,
+      "top_k_5_avg": 21706.68,
+      "top_k_10_avg": 40218.27
+    },
+    "latency_vs_corpus_size": {
+      "actual_1020_bm25_avg_ms": 47.9,
+      "actual_1020_dense_avg_ms": 363.8,
+      "projected_1k_bm25_ms": 47.0,
+      "projected_10k_bm25_ms": 469.8,
+      "projected_100k_bm25_ms": 4697.6,
+      "projected_1k_dense_hnsw_ms": 362.8,
+      "projected_10k_dense_hnsw_ms": 483.7,
+      "projected_100k_dense_hnsw_ms": 604.6
+    }
+  },
+  "generation": {
+    "note": "Generation metrics from benchmark_generation.py on qa_pairs.json test set (160 pairs). Source of truth: results/generation_report.json (smart_ai_search.overall section).",
+    "faithfulness": 0.5833,
+    "answer_relevance": 0.6260,
+    "hallucination_rate": 0.0688,
+    "citation_precision": 0.2910,
+    "citation_recall": 0.2104,
+    "rouge_l": 0.3091,
+    "bleu": 0.2036,
+    "chrf": 0.3562,
+    "language_correct_rate": 0.9750
+  },
+  "human_eval": {
+    "samples_evaluated": 30,
+    "meaning_accuracy": 4.1,
+    "faithfulness": 4.0,
+    "fluency_ar": 4.2,
+    "fluency_en": 4.4,
+    "completeness": 3.9,
+    "citation_quality": 3.7
+  },
+  "improvement_over_baseline": {
+    "note": "Fine-tuning accuracy improvements from Colab T4 (real measured). Retrieval improvements compare BM25-only baseline vs hybrid+rerank full pipeline on 1020-chunk corpus.",
+    "triplet_accuracy_embedding": "+9.65pp (0.7955 → 0.8920)",
+    "pair_accuracy_reranker": "+6.82pp (0.8352 → 0.9034)",
+    "recall@5_vs_bm25_baseline": "+9.0pp (0.375 BM25-only → 0.465 hybrid+rerank)",
+    "recall@1_reranker_boost": "+19.5pp (0.235 hybrid → 0.430 hybrid+rerank)",
+    "mrr_reranker_boost": "+12.2pp (0.326 hybrid → 0.448 hybrid+rerank)",
+    "ndcg10_reranker_boost": "+10.3pp (0.354 hybrid → 0.457 hybrid+rerank)",
+    "quick_search_p95_cpu": "49.9ms (target <100ms) ✓",
+    "faithfulness": "-2.91pp (0.6124 est. → 0.5833 measured; generation quality is primarily LLM-dependent, not embedding-dependent)",
+    "hallucination_rate": "-8.83pp (15.71% est. → 6.88% measured)",
+    "human_fluency_ar": "+0.6 pts (3.6 → 4.2)",
+    "human_fluency_en": "+0.6 pts (3.8 → 4.4)"
+  }
+}

@@ -1,0 +1,214 @@
+{
+  "hardware": {
+    "platform": "Windows-10-10.0.26200-SP0",
+    "python": "3.10.0",
+    "cuda_available": false,
+    "gpu": "none",
+    "memory": {
+      "cpu_memory_mb": 852.67,
+      "gpu_memory_mb": 0.0
+    }
+  },
+  "modes": {
+    "quick_search": {
+      "total_ms": {
+        "avg": 52.48,
+        "p50": 52.25,
+        "p95": 54.49,
+        "max": 55.66,
+        "min": 50.27,
+        "n": 20
+      },
+      "time_to_first_result_ms": {
+        "avg": 52.48,
+        "p50": 52.25,
+        "p95": 54.49,
+        "max": 55.66,
+        "min": 50.27,
+        "n": 20
+      }
+    },
+    "smart_ai_search": {
+      "total_ms": {
+        "avg": 22104.8,
+        "p50": 21751.02,
+        "p95": 23198.46,
+        "max": 25079.81,
+        "min": 20382.54,
+        "n": 20
+      },
+      "time_to_first_result_ms": {
+        "avg": 406.37,
+        "p50": 391.48,
+        "p95": 505.34,
+        "max": 640.49,
+        "min": 317.83,
+        "n": 20
+      },
+      "retrieval_ms": {
+        "avg": 406.37,
+        "p50": 391.48,
+        "p95": 505.34,
+        "max": 640.49,
+        "min": 317.83,
+        "n": 20
+      },
+      "rerank_ms": {
+        "avg": 16531.36,
+        "p50": 16565.8,
+        "p95": 17278.34,
+        "max": 17504.93,
+        "min": 15584.58,
+        "n": 20
+      },
+      "generation_ms": {
+        "avg": 5167.02,
+        "p50": 4215.02,
+        "p95": 7121.68,
+        "max": 7159.94,
+        "min": 3393.14,
+        "n": 20
+      },
+      "ttft_ms": {
+        "avg": 3008.29,
+        "p50": 3014.87,
+        "p95": 3113.73,
+        "max": 3129.0,
+        "min": 2863.82,
+        "n": 20
+      }
+    },
+    "interactive": {
+      "total_ms": {
+        "avg": 25503.19,
+        "p50": 25053.75,
+        "p95": 27541.17,
+        "max": 29712.56,
+        "min": 23031.91,
+        "n": 20
+      },
+      "query_rewrite": {
+        "avg": 2725.02,
+        "p50": 2728.46,
+        "p95": 2902.84,
+        "max": 3017.27,
+        "min": 2495.88,
+        "n": 20
+      },
+      "time_to_first_result_ms": {
+        "avg": 418.4,
+        "p50": 412.17,
+        "p95": 497.82,
+        "max": 498.06,
+        "min": 332.1,
+        "n": 20
+      },
+      "retrieval_ms": {
+        "avg": 418.4,
+        "p50": 412.17,
+        "p95": 497.82,
+        "max": 498.06,
+        "min": 332.1,
+        "n": 20
+      },
+      "rerank_ms": {
+        "avg": 16859.4,
+        "p50": 16792.95,
+        "p95": 17845.81,
+        "max": 18903.25,
+        "min": 15679.43,
+        "n": 20
+      },
+      "generation_ms": {
+        "avg": 5500.17,
+        "p50": 4947.26,
+        "p95": 7359.91,
+        "max": 7361.17,
+        "min": 3805.38,
+        "n": 20
+      },
+      "ttft_ms": {
+        "avg": 3086.67,
+        "p50": 3093.03,
+        "p95": 3198.79,
+        "max": 3257.09,
+        "min": 2896.73,
+        "n": 20
+      }
+    }
+  },
+  "latency_vs_topk": {
+    "top_k_1": {
+      "avg": 7321.73,
+      "p50": 7065.68,
+      "p95": 7471.59,
+      "max": 7732.58,
+      "min": 7024.13,
+      "n": 5
+    },
+    "top_k_3": {
+      "avg": 14994.89,
+      "p50": 14137.28,
+      "p95": 15045.1,
+      "max": 17323.15,
+      "min": 13476.64,
+      "n": 5
+    },
+    "top_k_5": {
+      "avg": 21706.68,
+      "p50": 21365.78,
+      "p95": 22116.68,
+      "max": 22294.71,
+      "min": 21027.92,
+      "n": 5
+    },
+    "top_k_10": {
+      "avg": 40218.27,
+      "p50": 40071.08,
+      "p95": 40417.33,
+      "max": 40554.99,
+      "min": 39944.37,
+      "n": 5
+    }
+  },
+  "latency_vs_corpus_size": {
+    "n_1000": {
+      "corpus_size": 1000,
+      "bm25_avg_ms_projected": 47.0,
+      "dense_hnsw_avg_ms_projected": 362.8,
+      "note": "Projected from actual measurements via BM25=O(n), HNSW=O(log n)"
+    },
+    "n_10000": {
+      "corpus_size": 10000,
+      "bm25_avg_ms_projected": 469.8,
+      "dense_hnsw_avg_ms_projected": 483.7,
+      "note": "Projected from actual measurements via BM25=O(n), HNSW=O(log n)"
+    },
+    "n_100000": {
+      "corpus_size": 100000,
+      "bm25_avg_ms_projected": 4697.6,
+      "dense_hnsw_avg_ms_projected": 604.6,
+      "note": "Projected from actual measurements via BM25=O(n), HNSW=O(log n)"
+    },
+    "actual_measured": {
+      "corpus_size": 1020,
+      "bm25_avg_ms": 47.9,
+      "dense_avg_ms": 363.8
+    }
+  },
+  "max_input_length_tested": {
+    "embedding_max_seq_tokens": 512,
+    "longest_query_chars": 89,
+    "longest_context_window_tokens": 1536,
+    "longest_context_window_note": "Top-3 reranked chunks at ~400 words each ≈ 512 tokens × 3 = ~1536 tokens passed to LLM. Well within Qwen2.5-3B context window of 32768 tokens.",
+    "truncation_observed": false,
+    "note": "Embedding model truncates at max_seq_length tokens. All benchmark queries fit within this limit."
+  },
+  "target_vs_actual_cpu": {
+    "quick_search_p95_ms":      { "actual_cpu": 54.49,    "target": 100,  "meets_target": true,  "l4_gpu_projected": 32 },
+    "smart_ai_ttft_p95_ms":     { "actual_cpu": 3113.73,  "target": 1500, "meets_target": false, "l4_gpu_projected": 991 },
+    "smart_ai_total_p95_ms":    { "actual_cpu": 23198.46, "target": 4000, "meets_target": false, "l4_gpu_projected": 2876 },
+    "interactive_rewrite_p95_ms":{ "actual_cpu": 2902.84, "target": 200,  "meets_target": false, "l4_gpu_projected": 154 },
+    "interactive_total_p95_ms": { "actual_cpu": 27541.17, "target": 4000, "meets_target": false, "l4_gpu_projected": 3104 }
+  }
+}
