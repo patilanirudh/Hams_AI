@@ -1,5 +1,16 @@
 # HamsAI RAG — Self-Hosted Bilingual Arabic & English RAG System
 
+## Links
+
+| Resource | URL |
+|---|---|
+| GitHub Repository | https://github.com/patilanirudh/Hams_AI |
+| Fine-tuned Embedding Model | https://huggingface.co/ani122312/bge-m3-hamsai-finetuned |
+| Fine-tuned Reranker Model | https://huggingface.co/ani122312/bge-reranker-hamsai-finetuned |
+| Demo Video | https://drive.google.com/file/d/1LBiiACyTFu1jqUMmXucBfwxOWbf5Ce5P/view?usp=sharing |
+
+---
+
 ## Project Overview
 
 HamsAI RAG is a fully self-hosted, real-time Retrieval-Augmented Generation system
